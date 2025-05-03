@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const terminal = document.getElementById('terminal');
     const introAnimation = document.querySelector('.intro-animation');
     const heroSection = document.querySelector('.hero-section');
-
+/
     // Verificações de erro
     if (!canvas || !terminal || !introAnimation || !heroSection) {
         console.error('Erro: Elementos necessários não encontrados.');
@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
     let width, height, particles = [], time = 0, dissolve = 0;
 
-    function resizeCanvas() {
+     function resizeCanvas() {
         width = window.innerWidth;
         height = window.innerHeight;
         canvas.width = width;
         canvas.height = height;
     }
-
+  
     function initParticles() {
         particles = [];
         const size = Math.min(width, height) * 0.5;
