@@ -1,123 +1,537 @@
-<!doctype html>
-<html lang="pt"> 
- <link rel="stylesheet" href="style.css">
- <head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <meta name="description" content="7Hydra - A Irmandade do Submundo, uma comunidade unida pelo caos e lealdade."> 
-  <meta name="keywords" content="7Hydra, Hydra Family, Pecados Capitais, Cavaleiros do Apocalipse"> 
-  <title>7Hydra - A Irmandade do Submundo</title> 
-  <link rel="stylesheet" href="styles.css"> 
- </head> 
- <body> 
-  <div id="errorScreen" class="terminal-overlay" role="alert" aria-live="assertive"></div> 
-  <div class="intro-animation" aria-hidden="true"> 
-   <canvas id="particleCanvas"></canvas> 
-   <div class="terminal" id="terminal"></div> 
-  </div> 
-  <header class="navbar" role="navigation"> 
-   <nav> <a href="#historia" aria-label="Ir para a seção História">História</a> <a href="#fundadores" aria-label="Ir para a seção Fundadores">Fundadores</a> <a href="#pecados" aria-label="Ir para a seção Pecados">Pecados</a> <a href="#uniao" aria-label="Ir para a seção Irmandade">Irmandade</a> 
-   </nav> 
-  </header> 
-  <section class="hero-section"> 
-   <div class="hero-content"> 
-    <h1 class="hero-title" bem-vindo ao submundo digital< h1> <p class="hero-subtitle">Explore a 7Hydra, onde o caos encontra a lealdade.</p> </h1>
-   </div> 
-  </section> 
-  <div class="container"> 
-   <main> 
-    <section class="card" id="historia"> 
-     <h2>Nossa História</h2> 
-     <p>No coração das sombras digitais, nasceu 7Hydra. Um lar para os que vivem entre o caos e a lealdade...</p> 
-     <p>Sejam muito bem-vindos à nossa casa <strong>Hydra Family</strong>. Antes de qualquer coisa, gostaríamos de explicar como funcionamos, quem são os responsáveis do servidor e a linhagem.</p> 
-     <p>Nossa casa é representada pelos <strong>Pecados Capitais</strong> e os <strong>Cavaleiros do Apocalipse</strong>. Gostamos bastante dessas referências e nossos fundadores escolheram elas para englobar o servidor inteiro.</p> 
-     <p>Todos os pecados e cavaleiros terão suas linhagens, que serão os familiares. Quem estiver em alguma estará sob a responsabilidade do líder da linhagem.</p> 
-     <p>No começo era só um grupo. Gente diferente, ideias soltas, conversas boas e outras nem tanto. Tinha presença, mas também ego. Como todo espaço onde amizade, vaidade e internet se encontram... uma hora estoura. A briga veio. De um lado, quem queria manter tudo do jeito antigo. Do outro, quem sonhava com algo novo. As panelas se fecharam, as tensões cresceram e o ambiente que antes era promissor começou a desmoronar.</p> 
-     <p>Mas do caos, nasceu algo inesperado. Não foi planejado, não foi imposto. Simplesmente… aconteceu. Entre os destroços, algumas pessoas decidiram ficar. Mas não pra repetir os erros — e sim pra transformar tudo. Foi aí que surgiu a Hydra.</p> 
-    </section> 
-    <section class="card" id="fundadores"> 
-     <h2>Fundadores - Cavaleiros do Inferno</h2> 
-     <table class="data-table"> 
-      <thead> 
-       <tr> 
-        <th>Cavaleiro</th> 
-        <th>Membro</th> 
-       </tr> 
-      </thead> 
-      <tbody> 
-       <tr>
-        <td>Guerra</td>
-        <td>Nova</td>
-       </tr> 
-       <tr>
-        <td>Peste</td>
-        <td>Murilo</td>
-       </tr> 
-       <tr>
-        <td>Fome</td>
-        <td>Settz</td>
-       </tr> 
-       <tr>
-        <td>Morte</td>
-        <td>Dark</td>
-       </tr> 
-      </tbody> 
-     </table> 
-    </section> 
-    <section class="card" id="pecados"> 
-     <h2>Os Sete Pecados</h2> 
-     <table class="data-table"> 
-      <thead> 
-       <tr> 
-        <th>Pecado</th> 
-        <th>Membro</th> 
-       </tr> 
-      </thead> 
-      <tbody> 
-       <tr>
-        <td>Luxúria</td>
-        <td>Beatriz</td>
-       </tr> 
-       <tr>
-        <td>Orgulho</td>
-        <td>Ymary</td>
-       </tr> 
-       <tr>
-        <td>Gula</td>
-        <td>Akame</td>
-       </tr> 
-       <tr>
-        <td>Ira</td>
-        <td>Marcos</td>
-       </tr> 
-       <tr>
-        <td>Avareza</td>
-        <td>Ziih</td>
-       </tr> 
-       <tr>
-        <td>Preguiça</td>
-        <td>Mítico</td>
-       </tr> 
-       <tr>
-        <td>Inveja</td>
-        <td>Nali</td>
-       </tr> 
-      </tbody> 
-     </table> 
-    </section> 
-    <section class="card" id="uniao"> 
-     <h2>A Irmandade</h2> 
-     <p>Entre as chamas do submundo, surgem guerreiros marcados pelos pecados, cada um portando uma linhagem ancestral e sombria.</p> 
-     <p>Essas linhagens não são apenas heranças, mas maldições poderosas. Passadas de geração em geração, moldam os cavaleiros com glória e dor.</p> 
-     <p>Juntos, eles se levantam como guardiões do caos e da honra. Unidos pelo sangue, pela guerra e pela fidelidade eterna.</p> 
-    </section> 
-    <div class="cta-container"> <a href="https://discord.gg/7hydra" class="cta-button" target="_blank" rel="noopener noreferrer" aria-label="Entrar no servidor do Discord">Entrar no Covil</a> 
-    </div> 
-   </main> 
-   <footer role="contentinfo">
-     © 2025 7Hydra. Todos os direitos reservados. 
-   </footer> 
-  </div> 
-  <script src="script.js"></script> 
- </body>
-</html>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="7Hydra - A Irmandade do Submundo, uma comunidade unida pelo caos e lealdade.">
+    <meta name="keywords" content="7Hydra, Hydra Family, Pecados Capitais, Cavaleiros do Apocalipse">
+    <title>7Hydra - A Irmandade do Submundo</title>
+    <style>
+        :root {
+            --primary: #00d4b8;
+            --secondary: #ff4081;
+            --dark: #0f0f0f;
+            --light: #e6e6e6;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-blur: blur(8px);
+            --glow: 0 0 8px rgba(0, 212, 184, 0.4);
+            --border-radius: 10px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 62.5%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.7;
+            color: var(--light);
+            background: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        /* Fundo com gradiente dinâmico */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 184, 0.1), rgba(255, 64, 129, 0.1));
+            z-index: -1;
+            animation: gradientFlow 15s ease infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animação de Entrada */
+        .intro-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .intro-animation.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .terminal {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(1.6rem, 2.2vw, 1.8rem);
+            color: var(--primary);
+            white-space: pre-wrap;
+            line-height: 1.6;
+            z-index: 2;
+            box-shadow: var(--shadow-md), var(--glow);
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            transition: background 1s ease;
+        }
+
+        .terminal span.error {
+            color: var(--secondary);
+        }
+
+        .terminal span.cursor {
+            display: inline-block;
+            width: 0.6em;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-section.visible {
+            opacity: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            transform-style: preserve-3d;
+        }
+
+        .hero-title {
+            font-size: clamp(3.8rem, 6vw, 5rem);
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+            color: var(--light);
+            margin-top: 1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            transform-style: preserve-3d;
+        }
+
+        /* Tipografia */
+        h1, h2 {
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 { font-size: clamp(3.8rem, 5vw, 5rem); }
+        h2 { font-size: clamp(2.6rem, 3.5vw, 3.2rem); }
+        p { font-size: clamp(1.5rem, 1.8vw, 1.7rem); margin-bottom: 1.5rem; }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            padding: 1.8rem;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-sm);
+            transform-style: preserve-3d;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: var(--shadow-md);
+            transform: translateZ(10px);
+        }
+
+        .navbar a {
+            color: var(--light);
+            margin: 0 2rem;
+            text-decoration: none;
+            font-size: 1.7rem;
+            font-weight: 500;
+            transition: var(--transition);
+            transform-style: preserve-3d;
+        }
+
+        .navbar a:hover {
+            color: var(--primary);
+            transform: translateZ(5px);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-md);
+            transform-style: preserve-3d;
+            transition: var(--transition);
+            perspective: 800px;
+        }
+
+        .card:hover {
+            transform: translateZ(15px) rotateX(2deg);
+            box-shadow: var(--shadow-md), var(--glow);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Tabelas */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: var(--border-radius);
+            transform-style: preserve-3d;
+        }
+
+        .data-table th, .data-table td {
+            padding: 1.4rem;
+            text-align: center;
+            font-size: 1.6rem;
+            transition: var(--transition);
+        }
+
+        .data-table th {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            font-weight: 600;
+            transform: translateZ(5px);
+        }
+
+        .data-table td {
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--light);
+        }
+
+        .data-table tr:hover td {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateZ(5px);
+        }
+
+        /* Botão CTA */
+        .cta-container {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 1.4rem 3rem;
+            font-size: 1.7rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            box-shadow: var(--shadow-md);
+            transform-style: preserve-3d;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: translateZ(10px);
+            box-shadow: var(--shadow-md), var(--glow);
+        }
+
+        /* Terminal Overlay */
+        .terminal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--primary);
+            font-family: 'Courier New', monospace;
+            padding: 3rem;
+            z-index: 1000;
+            display: none;
+            overflow-y: auto;
+            white-space: pre;
+            backdrop-filter: var(--glass-blur);
+            transform-style: preserve-3d;
+            perspective: 800px;
+            transform: translateZ(-50px);
+            transition: transform 0.5s ease;
+        }
+
+        .terminal-overlay.active {
+            transform: translateZ(0);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.4rem;
+            color: var(--light);
+            opacity: 0.8;
+            transform: translateZ(5px);
+        }
+
+        /* Acessibilidade */
+        @media (prefers-reduced-motion: reduce) {
+            .card, .navbar, .cta-button, .terminal-overlay, .data-table th, .data-table td, .hero-section, .intro-animation, .terminal {
+                transition: none !important;
+                transform: none !important;
+                animation: none !important;
+            }
+            .intro-animation { display: none; }
+            .hero-section { opacity: 1; }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            html { font-size: 58%; }
+            .navbar { padding: 1.5rem; }
+            .navbar a { margin: 0 1rem; font-size: 1.6rem; }
+            .card { padding: 2rem; margin: 2rem 0; }
+            .cta-button { padding: 1.2rem 2.5rem; font-size: 1.6rem; }
+            .hero-section { min-height: 50vh; }
+            .hero-title { font-size: clamp(3rem, 5vw, 4rem); }
+            .hero-subtitle { font-size: clamp(1.6rem, 2vw, 1.8rem); }
+            .terminal { max-width: 95%; font-size: clamp(1.4rem, 2vw, 1.6rem); }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 1.5rem; }
+            h1 { font-size: clamp(3.2rem, 7vw, 4rem); }
+            h2 { font-size: clamp(2.4rem, 5vw, 3rem); }
+            .data-table th, .data-table td { padding: 1rem; font-size: 1.4rem; }
+            .hero-section { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body id="main-body">
+    <div id="errorScreen" class="terminal-overlay" role="alert" aria-live="assertive"></div>
+    <div class="intro-animation" aria-hidden="true">
+        <canvas id="particleCanvas"></canvas>
+        <div class="terminal" id="terminal"></div>
+    </div>
+    <header class="navbar" role="navigation">
+        <nav>
+            <a href="#historia" aria-label="Ir para a seção História">História</a>
+            <a href="#fundadores" aria-label="Ir para a seção Fundadores">Fundadores</a>
+            <a href="#pecados" aria-label="Ir para a seção Pecados">Pecados</a>
+            <a href="#uniao" aria-label="Ir para a seção Irmandade">Irmandade</a>
+        </nav>
+    </header>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Bem-vindo ao Submundo Digital</h1>
+            <p class="hero-subtitle">Explore a 7Hydra, onde o caos encontra a lealdade.</p>
+        </div>
+    </section>
+    <div class="container">
+        <main>
+            <section class="card" id="historia">
+                <h2>Nossa História</h2>
+                <p>No coração das sombras digitais, nasceu 7Hydra. Um lar para os que vivem entre o caos e a lealdade...</p>
+                <p>Sejam muito bem-vindos à nossa casa <strong>Hydra Family</strong>. Antes de qualquer coisa, gostaríamos de explicar como funcionamos, quem são os responsáveis do servidor e a linhagem.</p>
+                <p>Nossa casa é representada pelos <strong>Pecados Capitais</strong> e os <strong>Cavaleiros do Apocalipse</strong>. Gostamos bastante dessas referências e nossos fundadores escolheram elas para englobar o servidor inteiro.</p>
+                <p>Todos os pecados e cavaleiros terão suas linhagens, que serão os familiares. Quem estiver em alguma estará sob a responsabilidade do líder da linhagem.</p>
+                <p>No começo era só um grupo. Gente diferente, ideias soltas, conversas boas e outras nem tanto. Tinha presença, mas também ego. Como todo espaço onde amizade, vaidade e internet se encontram... uma hora estoura. A briga veio. De um lado, quem queria manter tudo do jeito antigo. Do outro, quem sonhava com algo novo. As panelas se fecharam, as tensões cresceram e o ambiente que antes era promissor começou a desmoronar.</p>
+                <p>Mas do caos, nasceu algo inesperado. Não foi planejado, não foi imposto. Simplesmente… aconteceu. Entre os destroços, algumas pessoas decidiram ficar. Mas não pra repetir os erros — e sim pra transformar tudo. Foi aí que surgiu a Hydra.</p>
+            </section>
+            <section class="card" id="fundadores">
+                <h2>Fundadores - Cavaleiros do Inferno</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Cavaleiro</th>
+                            <th>Membro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Guerra</td><td>Nova</td></tr>
+                        <tr><td>Peste</td><td>Murilo</td></tr>
+                        <tr><td>Fome</td><td>Settz</td></tr>
+                        <tr><td>Morte</td><td>Dark</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class="card" id="pecados">
+                <h2>Os Sete Pecados</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Pecado</th>
+                            <th>Membro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Luxúria</td><td>Beatriz</td></tr>
+                        <tr><td>Orgulho</td><td>Ymary</td></tr>
+                        <tr><td>Gula</td><td>Akame</td></tr>
+                        <tr><td>Ira</td><td>Marcos</td></tr>
+                        <tr><td>Avareza</td><td>Ziih</td></tr>
+                        <tr><td>Preguiça</td><td>Mítico</td></tr>
+                        <tr><td>Inveja</td><td>Nali</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class="card" id="uniao">
+                <h2>A Irmandade</h2>
+                <p>Entre as chamas do submundo, surgem guerreiros marcados pelos pecados, cada um portando uma linhagem ancestral e sombria.</p>
+                <p>Essas linhagens não são apenas heranças, mas maldições poderosas. Passadas de geração em geração, moldam os cavaleiros com glória e dor.</p>
+                <p>Juntos, eles se levantam como guardiões do caos e da honra. Unidos pelo sangue, pela guerra e pela fidelidade eterna.</p>
+            </section>
+            <div class="cta-container">
+                <a href="https://discord.gg/7hydra" class="cta-button" target="_blank" rel="noopener noreferrer" aria-label="Entrar no servidor do Discord">Entrar no Covil</a>
+            </div>
+        </main>
+        <footer role="contentinfo">
+            © 2025 7Hydra. Todos os direitos reservados.
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configuração da animação de entrada
+            const canvas = document.getElementById('particleCanvas');
+            const terminal = document.getElementById('terminal');
+            const introAnimation = document.querySelector('.intro-animation');
+            const heroSection = document.querySelector('.hero-section');
+
+            // Verificações de erro
+            if (!canvas || !terminal || !introAnimation || !heroSection) {
+                console.error('Erro: Elementos necessários não encontrados.');
+                console.error('Canvas:', canvas);
+                console.error('Terminal:', terminal);
+                console.error('Intro Animation:', introAnimation);
+                console.error('Hero Section:', heroSection);
+                heroSection.classList.add('visible');
+                return;
+            }
+
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [], time = 0, dissolve = 0;
+
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+
+            function initParticles() {
+                particles = [];
+                const size = Math.min(width, height) * 0.5;
+                for (let i = 0; i < 20; i++) {
+                    particles.push({
+                        x: (Math.random() - 0.5) * size,
+                        y: (Math.random() - 0.5) * size,
+                        z: (Math.random() - 0.5) * size * 0.5,
+                        vx: (Math.random() - 0.5) * 0.3,
+                        vy: (Math.random() - 0.5) * 0.3,
+                        vz: (Math.random() - 0.5) * 0.3,
+                        life: Math.random() * 50
+                    });
+                }
+            }
+
+            function animateParticles() {
+                if (time > 4500) return; // Parar após 4.5 segundos
+                ctx.clearRect(0, 0, width, height);
+                const centerX = width / 2;
+                const centerY = height / 2;
+                const size = Math.min(width, height) * 0.5;
+                const perspective = 800;
+                time += 16.67; // Aproximadamente 60 FPS
+                dissolve = time > 3500 ? (time - 3500) / 1000 : 0; // Dissolução após 3.5s
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.z += p.vz;
+                    p.life--;
+                    if (p.life <= 0 && time < 3500) {
+                        p.x = (Math.random() - 0.5) * size;
+                        p.y = (Math.random() - 0.5) * size;
+                        p.z = (Math.random() - 0.5) * size * 0.5;
+                        p.vx = (Math.random() - 0.5) * 0.3;
+                        p.vy = (Math.random() - 0.5) * 0.3;
+                        p.vz = (Math.random() - 0.5) * 0.3;
+                        p.life = Math.random() * 50;
+                    }
+                    const scale = perspective / (perspective + p.z);
+                    const px = p.x * sca
