@@ -1,0 +1,317 @@
+:root {
+  /* Enhanced color palette with better contrast and transparency */
+  --primary: rgba(124, 77, 255, 0.92);
+  --secondary: rgba(128, 222, 234, 0.88);
+  --accent: rgba(255, 158, 128, 0.92);
+  --dark: rgba(33, 44, 50, 0.92);
+  --light: rgba(250, 250, 250, 0.96);
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.22);
+  --glass-blur: blur(18px);
+
+  /* Refined shadows with softer gradients */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.05), 0 6px 12px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.06), 0 12px 24px rgba(0, 0, 0, 0.04);
+
+  /* Smoother transitions with refined curves */
+  --transition-fast: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medium: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-slow: all 0.65s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* New variables for animations */
+  --glow: 0 0 10px rgba(124, 77, 255, 0.3);
+  --border-radius: 20px;
+}
+
+/* Modern reset with better accessibility */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.7;
+  color: var(--dark);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(230, 230, 230, 0.9) 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  backdrop-filter: blur(3px);
+  position: relative;
+}
+
+/* Enhanced typography with dynamic scaling */
+h1, h2, h3, h4 {
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 2rem;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+h1 { font-size: clamp(3.2rem, 5vw, 4.8rem); }
+h2 { font-size: clamp(2.8rem, 4vw, 3.6rem); }
+h3 { font-size: clamp(2.4rem, 3vw, 2.8rem); }
+h4 { font-size: clamp(2rem, 2.5vw, 2.4rem); }
+
+/* Refined container with flexible padding */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 3vw, 2.5rem);
+  backdrop-filter: var(--glass-blur);
+  position: relative;
+}
+
+/* Buttons with micro-interactions */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 2.4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: var(--shadow-md);
+  backdrop-filter: var(--glass-blur);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: var(--transition-fast);
+  z-index: -1;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+  color: var(--light);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-lg), var(--glow);
+  transform: translateY(-2px);
+}
+
+/* Enhanced glassmorphism cards */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  padding: 3rem;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
+  opacity: 0;
+  transition: var(--transition-medium);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl), var(--glow);
+}
+
+/* Sticky navbar with enhanced glass effect */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.8rem 3.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: var(--shadow-md);
+}
+
+/* Smoother animated gradient */
+.animated-gradient {
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 171, 145, 0.75),
+    rgba(255, 138, 101, 0.75),
+    rgba(128, 222, 234, 0.75),
+    rgba(77, 208, 225, 0.75)
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 12s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Enhanced hero section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 8rem;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(124, 77, 255, 0.08), transparent 70%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  background: radial-gradient(circle, rgba(124, 77, 255, 0.12), transparent 60%);
+  animation: pulse 18s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.3; }
+  100% { transform: scale(1.2); opacity: 0.6; }
+}
+
+/* 3D card effect with refined perspective */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: var(--transition-medium);
+  perspective: 1200px;
+}
+
+.card-3d:hover {
+  transform: perspective(1200px) rotateX(4deg) rotateY(4deg) scale(1.05);
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: var(--shadow-xl), var(--glow);
+}
+
+/* Improved dark mode */
+.dark-mode {
+  background: linear-gradient(145deg, rgba(18, 18, 18, 0.96) 0%, rgba(33, 33, 33, 0.92) 100%);
+  color: rgba(230, 230, 230, 0.92);
+}
+
+.dark-mode .card {
+  background: rgba(40, 40, 40, 0.18);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .navbar {
+  background: rgba(40, 40, 40, 0.18);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .btn-primary {
+  background: linear-gradient(45deg, var(--primary) 0%, var(--accent) 100%);
+}
+
+/* Enhanced responsiveness */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+
+  .navbar {
+    padding: 1.5rem 2.5rem;
+  }
+
+  .card {
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 58%;
+  }
+
+  .navbar {
+    padding: 1.2rem 2rem;
+  }
+
+  .card {
+    padding: 2rem;
+    border-radius: 16px;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+  }
+
+  .hero {
+    padding-top: 6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  h1 { font-size: clamp(2.8rem, 8vw, 3.6rem); }
+  h2 { font-size: clamp(2.4rem, 6vw, 3rem); }
+}
