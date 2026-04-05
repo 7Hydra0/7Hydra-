@@ -1,383 +1,669 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Para Ela - Uma homenagem especial">
+  <title>Para Ela ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #e6b800;
+      --secondary: #a30000;
+      --dark: #000000;
+      --light: #f0f0f0;
+      --accent: #2a2a2a;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --glass-blur: blur(6px);
+      --glow: 0 0 8px rgba(230, 184, 0, 0.3);
+      --border-radius: 8px;
+      --transition: all 0.3s ease;
+      --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.4);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
 
-<title>Ela</title>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    html {
+      scroll-behavior: smooth;
+      font-size: 62.5%;
+    }
 
-<style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      color: var(--light);
+      background: var(--dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    .particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat;
+      opacity: 0.1;
+    }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to bottom, #0a1a2f, #000000);
-  color: white;
-  padding: 20px;
-}
+    /* Estrelas */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-h1, h2 {
-  font-family: 'Cinzel', serif;
-  text-align: center;
-  margin-bottom: 20px;
-}
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkle 3s infinite;
+    }
 
-.card {
-  max-width: 850px;
-  margin: 40px auto;
-  padding: 25px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-}
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.8; }
+    }
 
-.bloco {
-  margin-bottom: 25px;
-  text-align: center;
-  line-height: 1.6;
-}
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: var(--glass-blur);
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+    }
 
-.destaque {
-  color: #4da6ff;
-  font-family: 'Cinzel', serif;
-  font-size: 1.3rem;
-}
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
 
-img {
-  width: 100%;
-  border-radius: 12px;
-  margin: 15px 0;
-  transition: 0.4s;
-}
+    .navbar a {
+      color: var(--light);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      transition: var(--transition);
+    }
 
-img:hover {
-  transform: scale(1.03);
-}
+    .navbar a:hover {
+      background: var(--glass-bg);
+      color: var(--primary);
+      box-shadow: var(--glow);
+    }
 
-.social {
-  text-align: center;
-  margin-top: 25px;
-}
+    .menu-toggle {
+      display: none;
+      font-size: 2.4rem;
+      color: var(--light);
+      cursor: pointer;
+      position: absolute;
+      right: 2rem;
+      top: 1.5rem;
+    }
 
-.social a {
-  margin: 0 15px;
-  color: #4da6ff;
-  font-size: 18px;
-  text-decoration: none;
-}
+    .hero-section {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 1.5rem 4rem;
+      overflow: hidden;
+    }
 
-</style>
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7));
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 100%;
+      padding: 0 1rem;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 900;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      color: var(--light);
+      opacity: 0.9;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      padding: 2.5rem;
+      margin: 2rem 1rem;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(230, 184, 0, 0.2);
+    }
+
+    .card h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.4rem, 5vw, 3rem);
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .card p {
+      font-size: clamp(1.4rem, 2.5vw, 1.6rem);
+      color: var(--light);
+      margin-bottom: 1rem;
+    }
+
+    .highlight {
+      color: var(--primary);
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 3vw, 1.8rem);
+      font-weight: 600;
+    }
+
+    .image-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .image-grid img {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 12px;
+      border: 1px solid var(--primary);
+      transition: var(--transition);
+      object-fit: cover;
+    }
+
+    .image-grid img:hover {
+      transform: scale(1.03);
+      box-shadow: var(--glow);
+    }
+
+    .ref-pilares {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .pilar {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(230, 184, 0, 0.1);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--primary);
+      min-width: 120px;
+    }
+
+    .pilar i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .pilar h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+
+    .pilar p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .quote-section {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(180deg, rgba(230, 184, 0, 0.05), transparent);
+      margin: 2rem 0;
+    }
+
+    .quote-section p {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      color: var(--primary);
+      text-shadow: var(--glow);
+    }
+
+    .social-links {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .social-links a {
+      color: var(--primary);
+      font-size: 2.5rem;
+      margin: 0 1.5rem;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .social-links a:hover {
+      color: var(--secondary);
+      transform: scale(1.1);
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: var(--light);
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.4rem, 2.5vw, 1.6rem);
+      border: none;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: var(--glow);
+    }
+
+    .action-btn:hover {
+      background: linear-gradient(45deg, var(--secondary), var(--primary));
+      transform: scale(1.03);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: rgba(0, 0, 0, 0.98);
+      border-top: 1px solid var(--primary);
+      margin-top: 3rem;
+    }
+
+    footer p {
+      font-size: clamp(1.2rem, 2vw, 1.4rem);
+      color: var(--light);
+      opacity: 0.8;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 1rem 0;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .navbar a {
+        font-size: 1.8rem;
+        padding: 1rem;
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-section {
+        min-height: 50vh;
+        padding: 6rem 1rem 3rem;
+      }
+
+      .card {
+        padding: 2rem;
+        margin: 2rem 0.5rem;
+      }
+
+      .image-grid img {
+        max-width: 100%;
+      }
+
+      .ref-pilares {
+        gap: 1rem;
+      }
+
+      .pilar {
+        padding: 1rem;
+        min-width: 90px;
+      }
+
+      .pilar i {
+        font-size: 2rem;
+      }
+
+      .pilar h3 {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: clamp(2rem, 6vw, 3.2rem);
+      }
+
+      .card h2 {
+        font-size: clamp(2rem, 4vw, 2.4rem);
+      }
+
+      .card p {
+        font-size: clamp(1.2rem, 2vw, 1.4rem);
+      }
+
+      .social-links a {
+        font-size: 2rem;
+        margin: 0 1rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<h1>Para Ela</h1>
-
-<!-- ❤️ ELA -->
-<section class="card">
-
-  <img src="images/foto1.jpg">
-  <img src="images/foto2.jpg">
-
-  <div class="bloco">
-    <p>No meio de tudo que eu vivo…</p>
-    <p>de toda pressão, de todo caos, de tudo que eu enfrento…</p>
-    <p><strong>é você que permanece.</strong></p>
-  </div>
-
-  <div class="bloco">
-    <p>Você não é comum.</p>
-    <p>Não é só bonita.</p>
-    <p>Não é só diferente.</p>
-  </div>
-
-  <div class="bloco destaque">
-    <p>Você parece uma deusa vivendo entre nós.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Sua presença domina.</p>
-    <p>Seu olhar prende.</p>
-    <p><strong>Você marca.</strong></p>
-  </div>
-
-  <div class="bloco">
-    <p>Mas o que mais me prende…</p>
-    <p>é o seu jeito.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Sua voz me acalma.</p>
-    <p>Como se o mundo inteiro ficasse em silêncio só pra eu te ouvir.</p>
-  </div>
-
-  <div class="bloco">
-    <p>E o seu jeito protetor comigo…</p>
-    <p><strong>isso não é comum.</strong></p>
-  </div>
-
-  <div class="bloco">
-    <p>No meio de tudo… você escolhe cuidar de mim.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Minha alma é sua.</p>
-    <p>Meu coração é seu.</p>
-    <p class="destaque">E todo o amor que existe em mim pertence a você.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Não é leve.</p>
-    <p>Não é simples.</p>
-    <p>Não é passageiro.</p>
-  </div>
-
-  <div class="bloco">
-    <p><strong>É intenso.</strong></p>
-    <p><strong>É real.</strong></p>
-    <p><strong>É você.</strong></p>
-  </div>
-
-  <div class="social">
-    <a href="https://www.instagram.com/oiiesther_?igsh=MTRwejhwM2JtMmNjeg==" target="_blank">Instagram</a>
-    <a href="https://www.tiktok.com/@oiiesther_?_r=1&_t=ZS-95ISztpVVKR" target="_blank">TikTok</a>
-  </div>
-
-</section>
-
-<!-- 🛡️ REF -->
-<section class="card">
-
-  <h2>REF</h2>
-
-  <div class="bloco">
-    <p>O REF não é apenas um servidor…</p>
-    <p><strong>é uma comunidade construída com propósito.</strong></p>
-  </div>
-
-  <div class="bloco">
-    <p>Não surgiu por acaso.</p>
-    <p>Foi formado com presença, visão e força.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Pessoas não ficam por obrigação…</p>
-    <p><strong>ficam por escolha.</strong></p>
-  </div>
-
-  <div class="bloco destaque">
-    <p>Esther • Maumau • TJ</p>
-  </div>
-
-  <div class="bloco">
-    <p>Cada um com sua importância.</p>
-    <p>Cada um com seu papel.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Mas entre todos…</p>
-    <p class="destaque">ela não faz parte do REF… ela define o REF.</p>
-  </div>
-
-</section>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Ela</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-
-<style>
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to bottom, #0a1a2f, #000000);
-  color: white;
-  padding: 20px;
-}
-
-h1, h2 {
-  font-family: 'Cinzel', serif;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.card {
-  max-width: 850px;
-  margin: 40px auto;
-  padding: 25px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-}
-
-.bloco {
-  margin-bottom: 25px;
-  text-align: center;
-  line-height: 1.6;
-}
-
-.destaque {
-  color: #4da6ff;
-  font-family: 'Cinzel', serif;
-  font-size: 1.3rem;
-}
-
-img {
-  width: 100%;
-  border-radius: 12px;
-  margin: 15px 0;
-  transition: 0.4s;
-}
-
-img:hover {
-  transform: scale(1.03);
-}
-
-.social {
-  text-align: center;
-  margin-top: 25px;
-}
-
-.social a {
-  margin: 0 15px;
-  color: #4da6ff;
-  font-size: 18px;
-  text-decoration: none;
-}
-
-</style>
-</head>
-
-<body>
-
-<h1>Para Ela</h1>
-
-<!-- ❤️ ELA -->
-<section class="card">
-
-  <img src="images/foto1.jpg">
-  <img src="images/foto2.jpg">
-
-  <div class="bloco">
-    <p>No meio de tudo que eu vivo…</p>
-    <p>de toda pressão, de todo caos, de tudo que eu enfrento…</p>
-    <p><strong>é você que permanece.</strong></p>
-  </div>
-
-  <div class="bloco">
-    <p>Você não é comum.</p>
-    <p>Não é só bonita.</p>
-    <p>Não é só diferente.</p>
-  </div>
-
-  <div class="bloco destaque">
-    <p>Você parece uma deusa vivendo entre nós.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Sua presença domina.</p>
-    <p>Seu olhar prende.</p>
-    <p><strong>Você marca.</strong></p>
-  </div>
-
-  <div class="bloco">
-    <p>Mas o que mais me prende…</p>
-    <p>é o seu jeito.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Sua voz me acalma.</p>
-    <p>Como se o mundo inteiro ficasse em silêncio só pra eu te ouvir.</p>
-  </div>
-
-  <div class="bloco">
-    <p>E o seu jeito protetor comigo…</p>
-    <p><strong>isso não é comum.</strong></p>
-  </div>
-
-  <div class="bloco">
-    <p>No meio de tudo… você escolhe cuidar de mim.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Minha alma é sua.</p>
-    <p>Meu coração é seu.</p>
-    <p class="destaque">E todo o amor que existe em mim pertence a você.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Não é leve.</p>
-    <p>Não é simples.</p>
-    <p>Não é passageiro.</p>
-  </div>
-
-  <div class="bloco">
-    <p><strong>É intenso.</strong></p>
-    <p><strong>É real.</strong></p>
-    <p><strong>É você.</strong></p>
-  </div>
-
-  <div class="social">
-    <a href="https://www.instagram.com/oiiesther_?igsh=MTRwejhwM2JtMmNjeg==" target="_blank">Instagram</a>
-    <a href="https://www.tiktok.com/@oiiesther_?_r=1&_t=ZS-95ISztpVVKR" target="_blank">TikTok</a>
-  </div>
-
-</section>
-
-<!-- 🛡️ REF -->
-<section class="card">
-
-  <h2>REF</h2>
-
-  <div class="bloco">
-    <p>O REF não é apenas um servidor…</p>
-    <p><strong>é uma comunidade construída com propósito.</strong></p>
-  </div>
-
-  <div class="bloco">
-    <p>Não surgiu por acaso.</p>
-    <p>Foi formado com presença, visão e força.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Pessoas não ficam por obrigação…</p>
-    <p><strong>ficam por escolha.</strong></p>
-  </div>
-
-  <div class="bloco destaque">
-    <p>Esther • Maumau • TJ</p>
-  </div>
-
-  <div class="bloco">
-    <p>Cada um com sua importância.</p>
-    <p>Cada um com seu papel.</p>
-  </div>
-
-  <div class="bloco">
-    <p>Mas entre todos…</p>
-    <p class="destaque">ela não faz parte do REF… ela define o REF.</p>
-  </div>
-
-</section>
-
+  <div class="particles"></div>
+  <div class="stars" id="stars"></div>
+
+  <nav class="navbar">
+    <i class="fas fa-bars menu-toggle"></i>
+    <div class="nav-links">
+      <a href="#ela">Ela</a>
+      <a href="#ref">REF</a>
+      <a href="#social">Contato</a>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Para Ela</h1>
+      <p class="hero-subtitle">Aquela que transforma o caos em calma<br>e o ordinário em eterno</p>
+    </div>
+  </section>
+
+  <main>
+    <!-- SEÇÃO ELA -->
+    <section id="ela" class="card">
+      <h2>❤️ Ela</h2>
+      
+      <div class="image-grid">
+        <img src="foto1.jpg" alt="Foto 1" onerror="this.src='https://placehold.co/600x400/1a1a2e/e6b800?text=Foto+1'">
+        <img src="foto2.jpg" alt="Foto 2" onerror="this.src='https://placehold.co/600x400/1a1a2e/e6b800?text=Foto+2'">
+      </div>
+
+      <p>No meio de tudo que eu vivo… de toda pressão, de todo caos, de tudo que eu construo e enfrento…<br>
+      <strong class="highlight">é você que permanece.</strong></p>
+
+      <p>Você não é comum.<br>
+      Não é só bonita.<br>
+      Não é só diferente.</p>
+
+      <p>Tem algo em você que não dá pra explicar.<br>
+      Uma presença que domina, um olhar que prende…<br>
+      e uma beleza que parece não pertencer a esse mundo.</p>
+
+      <p>Você não chama atenção só por existir…<br>
+      <strong class="highlight">você marca.</strong></p>
+
+      <p>E mesmo assim, não é isso que mais me prende em você.<br>
+      É o seu jeito.</p>
+
+      <p>A forma como você fala comigo.<br>
+      A forma como sua voz me acalma…<br>
+      como se o mundo inteiro diminuísse só pra eu te ouvir.</p>
+
+      <p>Tem algo na sua voz que me alcança de um jeito diferente.<br>
+      Que me acalma, me prende… e me faz ficar.</p>
+
+      <p>E o seu jeito protetor comigo…<br>
+      isso é algo que eu não consigo ignorar.</p>
+
+      <p>Porque no meio de tudo…<br>
+      de tudo que poderia acontecer…<br>
+      <strong class="highlight">você escolhe cuidar de mim.</strong></p>
+
+      <p>E isso… vale mais do que qualquer coisa.</p>
+
+      <p>Mais do que qualquer conquista.<br>
+      Mais do que qualquer poder.<br>
+      Mais do que qualquer império que eu possa construir.</p>
+
+      <p>Porque no final…<br>
+      não é sobre o que eu tenho.</p>
+
+      <p><strong class="highlight">É sobre você.</strong></p>
+
+      <p>Minha alma… é sua.<br>
+      Meu coração… é seu.<br>
+      E todo o amor que existe em mim… pertence a você.</p>
+
+      <p>Isso não é leve.<br>
+      Não é simples.<br>
+      E não é passageiro.</p>
+
+      <p><strong class="highlight">É intenso.<br>
+      É real.<br>
+      É você.</strong></p>
+    </section>
+
+    <div class="quote-section">
+      <p>"No meio do caos, você é minha ordem."</p>
+    </div>
+
+    <!-- SEÇÃO REF - A REFERÊNCIA -->
+    <section id="ref" class="card">
+      <h2>🛡️ REF</h2>
+      <p>Nos confins do digital, o REF não é apenas mais um servidor…<br>
+      <strong>é uma comunidade construída com propósito.</strong></p>
+
+      <p>Não surgiu por acaso.<br>
+      Não cresceu por sorte.</p>
+
+      <p>Foi formado com presença, visão e força.</p>
+
+      <p>Um espaço onde as pessoas não apenas entram…<br>
+      mas permanecem.</p>
+
+      <p><strong>Não por obrigação.<br>
+      Mas por escolha.</strong></p>
+
+      <p>Ali, conexões são criadas.<br>
+      Respeito é mantido.<br>
+      E a presença de cada membro tem valor.</p>
+
+      <p>Como toda grande estrutura…<br>
+      o REF se sustenta em pilares.</p>
+
+      <!-- Pilares / Referências -->
+      <div class="ref-pilares">
+        <div class="pilar">
+          <i class="fas fa-crown"></i>
+          <h3>Esther</h3>
+          <p>A Essência</p>
+        </div>
+        <div class="pilar">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Maumau</h3>
+          <p>A Força</p>
+        </div>
+        <div class="pilar">
+          <i class="fas fa-eye"></i>
+          <h3>TJ</h3>
+          <p>A Visão</p>
+        </div>
+      </div>
+
+      <p>Três nomes.<br>
+      Três presenças.<br>
+      Três forças que mantêm a base firme.</p>
+
+      <p>Cada um com seu papel.<br>
+      Cada um com sua importância.</p>
+
+      <p>Mas entre todos…<br>
+      existe uma essência que se destaca.</p>
+
+      <p>Uma presença que não passa despercebida.<br>
+      Que não precisa forçar espaço… porque naturalmente ocupa.</p>
+
+      <p class="highlight"><strong>Ela não apenas faz parte do REF.</strong></p>
+      <p><strong class="highlight">Ela representa.<br>
+      Ela influencia.<br>
+      Ela define.</strong></p>
+    </section>
+
+    <!-- SEÇÃO SOCIAL -->
+    <section id="social" class="card" style="text-align: center;">
+      <h2>📱 Conecte-se</h2>
+      <div class="social-links">
+        <a href="https://www.instagram.com/oiiesther_?igsh=MTRwejhwM2JtMmNjeg==" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@oiiesther_?_r=1&_t=ZS-95ISztpVVKR" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
+      <a href="#" class="action-btn" onclick="scrollToTop(); return false;">
+        <i class="fas fa-heart"></i> Voltar ao topo
+      </a>
+    </section>
+
+    <footer>
+      <p>© 2025 — Para Ela, com todo amor que existe em mim.</p>
+    </footer>
+  </main>
+
+  <script>
+    // Menu hamburguer
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+    }
+
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Scroll to top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(0, 0, 0, 0.98)';
+      } else {
+        navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+      }
+    });
+
+    // Animação dos cards ao scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.card').forEach((card) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'all 0.6s ease';
+      observer.observe(card);
+    });
+
+    // Criar estrelas
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 150; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.width = Math.random() * 3 + 'px';
+        star.style.height = star.style.width;
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 5 + 's';
+        star.style.animationDuration = Math.random() * 3 + 2 + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+    createStars();
+  </script>
 </body>
 </html>
