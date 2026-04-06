@@ -46,6 +46,130 @@
       --border-radius-round: 50%;
     }
 
+    .intro-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10000;
+      background: radial-gradient(ellipse at center, #0a1a3a 0%, #020408 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    .intro-screen.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .intro-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .intro-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .intro-content h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan-glow), var(--royal-blue), var(--fire-red), var(--purple-glow));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: titleGlowIntro 3s ease-in-out infinite, gradientShift 8s ease infinite;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    @keyframes titleGlowIntro {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.3)); }
+      50% { filter: drop-shadow(0 0 35px rgba(255, 51, 0, 0.5)); }
+    }
+
+    .intro-content p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+      opacity: 0.8;
+    }
+
+    .enter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--cyan-glow), var(--royal-blue));
+      color: white;
+      padding: 16px 42px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: var(--transition-normal);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+      animation: pulseBtn 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseBtn {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(0, 212, 255, 0.8); }
+    }
+
+    .enter-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: var(--transition-normal);
+    }
+
+    .enter-btn:hover::before {
+      left: 100%;
+    }
+
+    .enter-btn:hover {
+      transform: scale(1.08);
+      background: linear-gradient(135deg, var(--fire-red), var(--fire-orange));
+      box-shadow: 0 0 30px rgba(255, 51, 0, 0.6);
+    }
+
+    .main-content {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    .main-content.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: radial-gradient(ellipse at 20% 30%, #0a1a3a 0%, #020408 100%);
@@ -397,9 +521,6 @@
       text-shadow: var(--glow-cyan);
     }
 
-    /* ============================================
-       TEXTOS COM MOVIMENTO
-    ============================================ */
     .fire-text {
       background: linear-gradient(135deg, var(--fire-red), var(--fire-orange), var(--fire-yellow));
       background-size: 200% 200%;
@@ -444,7 +565,6 @@
       margin: 25px 0;
       overflow: hidden;
       white-space: normal;
-      animation: glowPulse 2s ease-in-out infinite;
     }
 
     .typing-text .fire-text {
@@ -499,9 +619,6 @@
     .fade-line:nth-child(1) { animation-delay: 0.2s; }
     .fade-line:nth-child(2) { animation-delay: 0.6s; }
     .fade-line:nth-child(3) { animation-delay: 1s; }
-    .fade-line:nth-child(4) { animation-delay: 1.4s; }
-    .fade-line:nth-child(5) { animation-delay: 1.8s; }
-    .fade-line:nth-child(6) { animation-delay: 2.2s; }
 
     @keyframes fadeInSequence {
       from { opacity: 0; transform: translateY(10px); }
@@ -631,7 +748,8 @@
       margin: 25px 0;
       transition: var(--transition-normal);
       border: none;
-      cursor: pointer;
+      cursor: pointe
+      r;
       position: relative;
       overflow: hidden;
     }
@@ -754,7 +872,8 @@
     ::-webkit-scrollbar {
       width: 8px;
     }
-     ::-webkit-scrollbar-track {
+
+    ::-webkit-scrollbar-track {
       background: var(--deep-blue);
       border-radius: 10px;
     }
@@ -768,444 +887,292 @@
       background: linear-gradient(135deg, var(--fire-orange), var(--cyan-glow));
     }
 
-    /* Responsividade */
     @media (max-width: 768px) {
-      .navbar {
-        gap: 15px;
-        padding: 10px 16px;
-      }
-      
-      .navbar a {
-        font-size: 0.75rem;
-        padding: 6px 12px;
-      }
-      
-      .header {
-        padding: 90px 16px 40px;
-      }
-      
-      .card {
-        padding: 30px 22px;
-        margin: 25px 16px;
-      }
-      
-      .card h2 {
-        font-size: 1.6rem;
-      }
-      
-      .pilares {
-        gap: 20px;
-      }
-      
-      .pilar {
-        min-width: 100px;
-        padding: 16px 12px;
-      }
-      
-      .pilar i {
-        font-size: 2rem;
-      }
-      
-      .pilar h3 {
-        font-size: 1.1rem;
-      }
-      
-      .counter-card {
-        padding: 18px 35px;
-      }
-      
-      .zoom-text .fire-text {
-        font-size: 1.4rem;
-      }
-      
-      .typing-text .fire-text {
-        font-size: 1.2rem;
-      }
-      
-      .wave-text .fire-text {
-        font-size: 1.3rem;
-      }
-      
-      .fade-sequence .fire-text {
-        font-size: 1.1rem;
-      }
-      
-      .social-links a {
-        font-size: 1.8rem;
-        margin: 0 15px;
-      }
-      
-      .discord-btn {
-        padding: 10px 24px;
-        font-size: 0.9rem;
-      }
-      
-      .btn-top {
-        padding: 10px 25px;
-        font-size: 0.9rem;
-      }
+      .navbar { gap: 15px; padding: 10px 16px; }
+      .navbar a { font-size: 0.75rem; padding: 6px 12px; }
+      .header { padding: 90px 16px 40px; }
+      .card { padding: 30px 22px; margin: 25px 16px; }
+      .card h2 { font-size: 1.6rem; }
+      .pilares { gap: 20px; }
+      .pilar { min-width: 100px; padding: 16px 12px; }
+      .pilar i { font-size: 2rem; }
+      .pilar h3 { font-size: 1.1rem; }
+      .counter-card { padding: 18px 35px; }
+      .zoom-text .fire-text { font-size: 1.4rem; }
+      .typing-text .fire-text { font-size: 1.2rem; }
+      .wave-text .fire-text { font-size: 1.3rem; }
+      .social-links a { font-size: 1.8rem; margin: 0 15px; }
+      .discord-btn { padding: 10px 24px; font-size: 0.9rem; }
+      .btn-top { padding: 10px 25px; font-size: 0.9rem; }
     }
 
     @media (max-width: 480px) {
-      .navbar {
-        gap: 8px;
-      }
-      
-      .navbar a {
-        font-size: 0.65rem;
-        padding: 4px 8px;
-      }
-      
-      .header {
-        padding: 80px 16px 30px;
-      }
-      
-      .header h1 {
-        font-size: 1.8rem;
-      }
-      
-      .card {
-        padding: 22px 16px;
-        margin: 20px 12px;
-      }
-      
-      .card h2 {
-        font-size: 1.3rem;
-      }
-      
-      .card p {
-        font-size: 0.85rem;
-      }
-      
-      .pilares {
-        gap: 12px;
-      }
-      
-      .pilar {
-        min-width: 80px;
-        padding: 12px 8px;
-      }
-      
-      .pilar i {
-        font-size: 1.5rem;
-      }
-      
-      .pilar h3 {
-        font-size: 0.9rem;
-      }
-      
-      .pilar p {
-        font-size: 0.65rem;
-      }
-      
-      .counter-card {
-        padding: 12px 22px;
-      }
-      
-      .counter-number {
-        font-size: 2.5rem;
-      }
-      
-      .counter-label {
-        font-size: 0.7rem;
-      }
-      
-      .zoom-text .fire-text {
-        font-size: 1.2rem;
-      }
-      
-      .typing-text .fire-text {
-        font-size: 1rem;
-      }
-      
-      .wave-text .fire-text {
-        font-size: 1.1rem;
-      }
-      
-      .fire-text {
-        font-size: 1rem;
-      }
-      
-      .highlight {
-        font-size: 0.9rem;
-      }
-      
-      .intro-quote {
-        font-size: 1rem;
-      }
-      
-      .social-links a {
-        font-size: 1.5rem;
-        margin: 0 12px;
-      }
-      
-      .discord-btn {
-        padding: 8px 18px;
-        font-size: 0.8rem;
-      }
-      
-      .btn-top {
-        padding: 8px 20px;
-        font-size: 0.8rem;
-      }
-      
-      footer p {
-        font-size: 0.7rem;
-      }
+      .navbar { gap: 8px; }
+      .navbar a { font-size: 0.65rem; padding: 4px 8px; }
+      .header { padding: 80px 16px 30px; }
+      .header h1 { font-size: 1.8rem; }
+      .card { padding: 22px 16px; margin: 20px 12px; }
+      .card h2 { font-size: 1.3rem; }
+      .card p { font-size: 0.85rem; }
+      .pilares { gap: 12px; }
+      .pilar { min-width: 80px; padding: 12px 8px; }
+      .pilar i { font-size: 1.5rem; }
+      .pilar h3 { font-size: 0.9rem; }
+      .counter-card { padding: 12px 22px; }
+      .counter-number { font-size: 2.5rem; }
+      .zoom-text .fire-text { font-size: 1.2rem; }
+      .typing-text .fire-text { font-size: 1rem; }
+      .wave-text .fire-text { font-size: 1.1rem; }
+      .fire-text { font-size: 1rem; }
+      .social-links a { font-size: 1.5rem; margin: 0 12px; }
+      .discord-btn { padding: 8px 18px; font-size: 0.8rem; }
+      .btn-top { padding: 8px 20px; font-size: 0.8rem; }
+      footer p { font-size: 0.7rem; }
     }
 
-    /* Seleção de texto */
-    ::selection {
-      background: var(--cyan-glow);
-      color: var(--dark-bg);
-    }
-
-    ::-moz-selection {
-      background: var(--cyan-glow);
-      color: var(--dark-bg);
-    }
-
-    /* Animações gerais */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     body {
       animation: fadeInUp 0.8s ease;
     }
 
-    /* Classes auxiliares */
-    .text-center {
-      text-align: center;
-    }
-
-    .btn-container {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      margin: 30px 0;
-    }
-
-    .final-quote {
-      text-align: center;
-      font-size: 1.3rem;
-      margin-top: 25px;
-    }
-
-    .highlight-large {
-      text-align: center;
-      font-size: 1.2rem;
-      margin: 20px 0;
-    }
-
-    .fire-center {
-      text-align: center;
-      margin: 20px 0;
+    ::selection {
+      background: var(--cyan-glow);
+      color: var(--dark-bg);
     }
   </style>
 </head>
 <body>
-
-<div class="cosmic-bg"></div>
-<div class="nebula"></div>
-<div class="flames"></div>
-<div class="stars" id="stars"></div>
-
-<nav class="navbar">
-  <a href="#ela">Ela</a>
-  <a href="#ref">A REF</a>
-  <a href="#social">Contato</a>
-</nav>
-
-<header class="header">
-  <h1>Para Minha Dominação</h1>
-  <p class="subtitle">ESTHER — A Essência que Define</p>
-  
-  <div class="counter-container">
-    <div class="counter-card">
-      <div class="counter-number" id="daysCounter">38</div>
-      <div class="counter-label">DIAS JUNTOS</div>
-    </div>
+  <!-- TELA DE ABERTURA COM VÍDEO -->
+<div class="intro-screen" id="introScreen">
+  <video class="intro-video" id="introVideo" autoplay muted loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+  <div class="intro-content">
+    <h1>Para Minha Dominação</h1>
+    <p>ESTHER — A Essência que Define</p>
+    <button class="enter-btn" id="enterBtn">
+      <i class="fas fa-key"></i> ENTRAR
+    </button>
   </div>
-</header>
+</div>
+  <!-- CONTEÚDO PRINCIPAL -->
+<div class="main-content" id="mainContent">
+  <div class="cosmic-bg"></div>
+  <div class="nebula"></div>
+  <div class="flames"></div>
+  <div class="stars" id="stars"></div>
 
-<main>
-  <!-- SEÇÃO ELA -->
-  <section id="ela" class="card">
-    <h2>❤️ ELA</h2>
+  <nav class="navbar">
+    <a href="#ela">Ela</a>
+    <a href="#ref">A REF</a>
+    <a href="#social">Contato</a>
+  </nav>
+
+  <header class="header">
+    <h1>Para Minha Dominação</h1>
+    <p class="subtitle">ESTHER — A Essência que Define</p>
     
-    <div class="image-grid">
-      <img src="foto1.jpg" alt="Foto de Esther" onerror="this.src='https://placehold.co/600x400/0a1a3a/00d4ff?text=Esther'">
-      <img src="foto2.jpg" alt="Foto de Esther" onerror="this.src='https://placehold.co/600x400/0a1a3a/00d4ff?text=Esther'">
-    </div>
-
-    <div class="intro-quote">
-      <span class="highlight">✨ Você é um silêncio que ecoa. ✨</span>
-    </div>
-
-    <p>Tem algo em você que não dá pra explicar.<br>
-    Uma presença que domina, um olhar que prende...<br>
-    e uma beleza que parece não pertencer a esse mundo.</p>
-
-    <p>Você não chama atenção só por existir...</p>
-
-    <div class="zoom-text">
-      <strong class="fire-text">🔥 VOCÊ MARCA. 🔥</strong>
-    </div>
-
-    <p>E mesmo assim, não é isso que mais me prende em você.<br>
-    É o seu jeito.</p>
-
-    <p>A forma como você fala comigo.<br>
-    A forma como sua voz me acalma...<br>
-    como se o mundo inteiro diminuísse só pra eu te ouvir.</p>
-
-    <p>Tem algo na sua voz que me alcança de um jeito diferente.<br>
-    Que me acalma, me prende... e me faz ficar.</p>
-
-    <p>E o seu jeito protetor comigo...<br>
-    isso é algo que eu não consigo ignorar.</p>
-
-    <p>Porque no meio de tudo...<br>
-    de tudo que poderia acontecer...</p>
-
-    <div class="typing-text">
-      <strong class="fire-text">💙 VOCÊ ESCOLHE CUIDAR DE MIM. 💙</strong>
-    </div>
-
-    <p>E isso... vale mais do que qualquer coisa.</p>
-
-    <p>Mais do que qualquer conquista.<br>
-    Mais do que qualquer poder.<br>
-    Mais do que qualquer império que eu possa construir.</p>
-
-    <p>Porque no final...<br>
-    não é sobre o que eu tenho.</p>
-
-    <div class="wave-text">
-      <strong class="fire-text">🌙 É SOBRE VOCÊ. 🌙</strong>
-    </div>
-
-    <p>Minha alma... é sua.<br>
-    Meu coração... é seu.<br>
-    E todo o amor que existe em mim... pertence a você.</p>
-
-    <p>Isso não é leve.<br>
-    Não é simples.<br>
-    E não é passageiro.</p>
-
-    <div class="fade-sequence">
-      <strong class="fire-text">
-        <span class="fade-line">✨ É INTENSO. ✨</span><br>
-        <span class="fade-line">💫 É REAL. 💫</span><br>
-        <span class="fade-line">🌟 É VOCÊ. 🌟</span>
-      </strong>
-    </div>
-  </section>
-
-  <!-- SEÇÃO A REF -->
-  <section id="ref" class="card">
-    <h2>🛡️ A REF</h2>
-    
-    <p>Nos confins do digital, a REF não é apenas mais um servidor...<br>
-    <strong class="highlight">é uma comunidade construída com propósito.</strong></p>
-
-    <p>Não surgiu por acaso.<br>
-    Não cresceu por sorte.</p>
-
-    <p>Foi formada com presença, visão e força.</p>
-
-    <div class="zoom-text" style="margin: 25px 0;">
-      <strong class="fire-text">⚔️ Como toda grande estrutura... a REF se sustenta em pilares. ⚔️</strong>
-    </div>
-
-    <div class="pilares">
-      <div class="pilar">
-        <i class="fas fa-crown"></i>
-        <h3>ESTHER</h3>
-        <p>A Essência</p>
-      </div>
-      <div class="pilar">
-        <i class="fas fa-shield-alt"></i>
-        <h3>MAUMAU</h3>
-        <p>A Força</p>
-      </div>
-      <div class="pilar">
-        <i class="fas fa-eye"></i>
-        <h3>TJ</h3>
-        <p>A Visão</p>
+    <div class="counter-container">
+      <div class="counter-card">
+        <div class="counter-number" id="daysCounter">38</div>
+        <div class="counter-label">DIAS JUNTOS</div>
       </div>
     </div>
+  </header>
 
-    <p class="text-center">Três nomes.<br>
-    Três presenças.<br>
-    Três forças que mantêm a base firme.</p>
+  <main>
+    <section id="ela" class="card">
+      <h2>❤️ ELA</h2>
+      
+      <div class="image-grid">
+        <img src="foto1.jpg" alt="Foto de Esther" onerror="this.src='https://placehold.co/600x400/0a1a3a/00d4ff?text=Esther'">
+        <img src="foto2.jpg" alt="Foto de Esther" onerror="this.src='https://placehold.co/600x400/0a1a3a/00d4ff?text=Esther'">
+      </div>
 
-    <p>Cada um com seu papel.<br>
-    Cada um com sua importância.</p>
+      <div class="intro-quote">
+        <span class="highlight">✨ Você é um silêncio que ecoa. ✨</span>
+      </div>
 
-    <p>Mas entre todos...<br>
-    existe uma essência que se destaca.</p>
+      <p>Tem algo em você que não dá pra explicar.<br>
+      Uma presença que domina, um olhar que prende...<br>
+      e uma beleza que parece não pertencer a esse mundo.</p>
 
-    <p>Uma presença que não passa despercebida.<br>
-    Que não precisa forçar espaço... porque naturalmente ocupa.</p>
+      <p>Você não chama atenção só por existir...</p>
 
-    <div class="typing-text" style="margin: 25px 0;">
-      <strong class="fire-text">🌟 ELA NÃO APENAS FAZ PARTE DA REF. 🌟</strong>
-    </div>
+      <div class="zoom-text">
+        <strong class="fire-text">🔥 VOCÊ MARCA. 🔥</strong>
+      </div>
 
-    <div class="wave-text">
-      <strong class="highlight">ELA REPRESENTA.<br>
-      ELA INFLUENCIA.<br>
-      ELA DEFINE.</strong>
-    </div>
+      <p>E mesmo assim, não é isso que mais me prende em você.<br>
+      É o seu jeito.</p>
 
-    <div class="btn-container">
-      <a href="https://discord.gg/reff" target="_blank" class="discord-btn">
-        <i class="fab fa-discord"></i> Entrar na REF
+      <p>A forma como você fala comigo.<br>
+      A forma como sua voz me acalma...<br>
+      como se o mundo inteiro diminuísse só pra eu te ouvir.</p>
+
+      <p>Tem algo na sua voz que me alcança de um jeito diferente.<br>
+      Que me acalma, me prende... e me faz ficar.</p>
+
+      <p>E o seu jeito protetor comigo...<br>
+      isso é algo que eu não consigo ignorar.</p>
+
+      <p>Porque no meio de tudo...<br>
+      de tudo que poderia acontecer...</p>
+
+      <div class="typing-text">
+        <strong class="fire-text">💙 VOCÊ ESCOLHE CUIDAR DE MIM. 💙</strong>
+      </div>
+
+      <p>E isso... vale mais do que qualquer coisa.</p>
+
+      <p>Mais do que qualquer conquista.<br>
+      Mais do que qualquer poder.<br>
+      Mais do que qualquer império que eu possa construir.</p>
+
+      <p>Porque no final...<br>
+      não é sobre o que eu tenho.</p>
+
+      <div class="wave-text">
+        <strong class="fire-text">🌙 É SOBRE VOCÊ. 🌙</strong>
+      </div>
+
+      <p>Minha alma... é sua.<br>
+      Meu coração... é seu.<br>
+      E todo o amor que existe em mim... pertence a você.</p>
+
+      <p>Isso não é leve.<br>
+      Não é simples.<br>
+      E não é passageiro.</p>
+
+      <div class="fade-sequence">
+        <strong class="fire-text">
+          <span class="fade-line">✨ É INTENSO. ✨</span><br>
+          <span class="fade-line">💫 É REAL. 💫</span><br>
+          <span class="fade-line">🌟 É VOCÊ. 🌟</span>
+        </strong>
+      </div>
+    </section>
+
+    <section id="ref" class="card">
+      <h2>🛡️ A REF</h2>
+      
+      <p>Nos confins do digital, a REF não é apenas mais um servidor...<br>
+      <strong class="highlight">é uma comunidade construída com propósito.</strong></p>
+
+      <p>Não surgiu por acaso.<br>
+      Não cresceu por sorte.</p>
+
+      <p>Foi formada com presença, visão e força.</p>
+
+      <div class="zoom-text" style="margin: 25px 0;">
+        <strong class="fire-text">⚔️ Como toda grande estrutura... a REF se sustenta em pilares. ⚔️</strong>
+      </div>
+
+      <div class="pilares">
+        <div class="pilar">
+          <i class="fas fa-crown"></i>
+          <h3>ESTHER</h3>
+          <p>A Essência</p>
+        </div>
+        <div class="pilar">
+          <i class="fas fa-shield-alt"></i>
+          <h3>MAUMAU</h3>
+          <p>A Força</p>
+        </div>
+        <div class="pilar">
+          <i class="fas fa-eye"></i>
+          <h3>TJ</h3>
+          <p>A Visão</p>
+        </div>
+      </div>
+
+      <p class="text-center">Três nomes.<br>
+      Três presenças.<br>
+      Três forças que mantêm a base firme.</p>
+
+      <p>Cada um com seu papel.<br>
+      Cada um com sua importância.</p>
+
+      <p>Mas entre todos...<br>
+      existe uma essência que se destaca.</p>
+
+      <p>Uma presença que não passa despercebida.<br>
+      Que não precisa forçar espaço... porque naturalmente ocupa.</p>
+
+      <div class="typing-text" style="margin: 25px 0;">
+        <strong class="fire-text">🌟 ELA NÃO APENAS FAZ PARTE DA REF. 🌟</strong>
+      </div>
+
+      <div class="wave-text">
+        <strong class="highlight">ELA REPRESENTA.<br>
+        ELA INFLUENCIA.<br>
+        ELA DEFINE.</strong>
+      </div>
+
+      <div class="btn-container">
+        <a href="https://discord.gg/reff" target="_blank" class="discord-btn">
+          <i class="fab fa-discord"></i> Entrar na REF
+        </a>
+      </div>
+    </section>
+
+    <section id="social" class="card" style="text-align: center;">
+      <h2>📱 CONECTE-SE</h2>
+      
+      <div class="social-links">
+        <a href="https://www.instagram.com/oiiesther_?igsh=MTRwejhwM2JtMmNjeg==" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@oiiesther_?_r=1&_t=ZS-95ISztpVVKR" target="_blank">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://discord.gg/reff" target="_blank">
+          <i class="fab fa-discord"></i>
+        </a>
+      </div>
+
+      <a href="#" class="btn-top" id="backToTopBtn">
+        <i class="fas fa-heart"></i> VOLTAR AO TOPO
       </a>
-    </div>
-  </section>
+    </section>
 
-  <!-- SEÇÃO SOCIAL -->
-  <section id="social" class="card" style="text-align: center;">
-    <h2>📱 CONECTE-SE</h2>
+    <footer>
+      <p>© 2025 — Para Minha Dominação, com todo amor que existe em mim.</p>
+      <p style="font-size: 0.8rem; margin-top: 10px;">🔥 Entre o inferno e o universo, você é meu cosmos. 🌌</p>
+    </footer>
+  </main>
+  </div>
+      <script>
+  // TELA DE ABERTURA
+  const introScreen = document.getElementById('introScreen');
+  const mainContent = document.getElementById('mainContent');
+  const enterBtn = document.getElementById('enterBtn');
+  const introVideo = document.getElementById('introVideo');
+
+  function showMainContent() {
+    introScreen.classList.add('hide');
+    mainContent.classList.add('show');
     
-    <div class="social-links">
-      <a href="https://www.instagram.com/oiiesther_?igsh=MTRwejhwM2JtMmNjeg==" target="_blank">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://www.tiktok.com/@oiiesther_?_r=1&_t=ZS-95ISztpVVKR" target="_blank">
-        <i class="fab fa-tiktok"></i>
-      </a>
-      <a href="https://discord.gg/reff" target="_blank">
-        <i class="fab fa-discord"></i>
-      </a>
-    </div>
+    setTimeout(() => {
+      if (introVideo) {
+        introVideo.pause();
+      }
+    }, 1000);
+  }
 
-    <a href="#" class="btn-top" id="backToTopBtn">
-      <i class="fas fa-heart"></i> VOLTAR AO TOPO
-    </a>
-  </section>
+  enterBtn.addEventListener('click', showMainContent);
 
-  <footer>
-    <p>© 2025 — Para Minha Dominação, com todo amor que existe em mim.</p>
-    <p style="font-size: 0.8rem; margin-top: 10px;">🔥 Entre o inferno e o universo, você é meu cosmos. 🌌</p>
-  </footer>
-</main>
+  introScreen.addEventListener('click', function(e) {
+    if (e.target === introScreen || e.target.classList.contains('intro-content')) {
+      showMainContent();
+    }
+  });
 
-<script>
-  // CONTADOR - 38 dias fixo em 2025, a partir de 2026 começa a contar
+  // CONTADOR
   const baseDate = new Date(2025, 1, 26);
   const startingDays = 38;
   const daysCounterElement = document.getElementById('daysCounter');
@@ -1225,7 +1192,9 @@
       totalDays = startingDays + (diffDays > 0 ? diffDays : 0);
     }
     
-    daysCounterElement.textContent = totalDays;
+    if (daysCounterElement) {
+      daysCounterElement.textContent = totalDays;
+    }
   }
 
   updateCounter();
@@ -1280,6 +1249,7 @@
   // Criar estrelas
   function createStars() {
     const starsContainer = document.getElementById('stars');
+    if (!starsContainer) return;
     const starCount = 200;
     
     for (let i = 0; i < starCount; i++) {
