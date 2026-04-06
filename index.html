@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Para Minha Dominação - Esther | REF">
+  <meta name="description" content="Para Minha Dominação - Esther | A REF">
   <title>Para Minha Dominação | Esther</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -443,7 +443,7 @@
 
 <nav class="navbar">
   <a href="#ela">Ela</a>
-  <a href="#ref">REF</a>
+  <a href="#ref">A REF</a>
   <a href="#social">Contato</a>
 </nav>
 
@@ -521,19 +521,19 @@
     É VOCÊ.</strong></p>
   </section>
 
-  <!-- SEÇÃO REF -->
+  <!-- SEÇÃO A REF -->
   <section id="ref" class="card">
-    <h2>🛡️ REF</h2>
+    <h2>🛡️ A REF</h2>
     
-    <p>Nos confins do digital, o REF não é apenas mais um servidor...<br>
+    <p>Nos confins do digital, a REF não é apenas mais um servidor...<br>
     <strong class="highlight">é uma comunidade construída com propósito.</strong></p>
 
     <p>Não surgiu por acaso.<br>
     Não cresceu por sorte.</p>
 
-    <p>Foi formado com presença, visão e força.</p>
+    <p>Foi formada com presença, visão e força.</p>
 
-    <p style="text-align: center; margin: 25px 0;"><strong class="fire-text">⚔️ Como toda grande estrutura... o REF se sustenta em pilares. ⚔️</strong></p>
+    <p style="text-align: center; margin: 25px 0;"><strong class="fire-text">⚔️ Como toda grande estrutura... a REF se sustenta em pilares. ⚔️</strong></p>
 
     <div class="pilares">
       <div class="pilar">
@@ -566,7 +566,7 @@
     <p>Uma presença que não passa despercebida.<br>
     Que não precisa forçar espaço... porque naturalmente ocupa.</p>
 
-    <p style="text-align: center; margin: 25px 0;"><strong class="fire-text">🌟 ELA NÃO APENAS FAZ PARTE DO REF. 🌟</strong></p>
+    <p style="text-align: center; margin: 25px 0;"><strong class="fire-text">🌟 ELA NÃO APENAS FAZ PARTE DA REF. 🌟</strong></p>
 
     <p style="text-align: center; font-size: 1.2rem;"><strong class="highlight">ELA REPRESENTA.<br>
     ELA INFLUENCIA.<br>
@@ -574,7 +574,7 @@
 
     <div style="text-align: center;">
       <a href="https://discord.gg/reff" target="_blank" class="discord-btn">
-        <i class="fab fa-discord"></i> Entrar no REF
+        <i class="fab fa-discord"></i> Entrar na REF
       </a>
     </div>
   </section>
@@ -607,26 +607,43 @@
 </main>
 
 <script>
-  // CONTADOR CORRIGIDO - 38 dias a partir de 26/02/2025
-  const startDate = new Date(2025, 1, 26); // 26 de Fevereiro de 2025 (mês 1 = Fevereiro)
-  const initialDays = 38;
+  // CONTADOR CORRIGIDO
+  // 38 dias é a partir de 26/02/2025
+  // A partir de 2026, conta os dias normalmente
+  
+  const baseDate = new Date(2025, 1, 26); // 26 de Fevereiro de 2025
+  const startingDays = 38;
   const daysCounterElement = document.getElementById('daysCounter');
 
   function updateCounter() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
-    const diffTime = today - startDate;
+    // Calcula a diferença em dias entre hoje e a data base
+    const diffTime = today - baseDate;
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    const totalDays = initialDays + (diffDays > 0 ? diffDays : 0);
+    
+    let totalDays;
+    
+    // Se ainda estiver em 2025
+    if (today.getFullYear() === 2025) {
+      // Mantém 38 dias fixos durante todo o ano de 2025
+      totalDays = startingDays;
+    } else {
+      // A partir de 2026, soma os dias que passaram
+      totalDays = startingDays + (diffDays > 0 ? diffDays : 0);
+    }
     
     daysCounterElement.textContent = totalDays;
   }
 
+  // Executa a função ao carregar a página
   updateCounter();
+  
+  // Atualiza o contador a cada 24 horas
   setInterval(updateCounter, 86400000);
 
-  // Scroll suave
+  // Scroll suave para os links do menu
   document.querySelectorAll('.navbar a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
@@ -640,11 +657,12 @@
     });
   });
 
+  // Função para voltar ao topo
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Animação dos cards
+  // Animação dos cards ao aparecer na tela
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -657,10 +675,12 @@
     observer.observe(card);
   });
 
-  // Criar estrelas
+  // Criar estrelas aleatórias
   function createStars() {
     const starsContainer = document.getElementById('stars');
-    for (let i = 0; i < 200; i++) {
+    const starCount = 200;
+    
+    for (let i = 0; i < starCount; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
       const size = Math.random() * 3 + 1;
@@ -673,9 +693,10 @@
       starsContainer.appendChild(star);
     }
   }
+  
   createStars();
 
-  // Efeito de parallax
+  // Efeito de parallax nas chamas ao mover o mouse
   window.addEventListener('mousemove', (e) => {
     const flames = document.querySelector('.flames');
     const x = (e.clientX / window.innerWidth - 0.5) * 20;
@@ -686,4 +707,4 @@
   });
 </script>
 </body>
-  </html>
+</html>
