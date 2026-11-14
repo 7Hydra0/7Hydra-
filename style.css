@@ -572,3 +572,36 @@ h2 {
   background: var(--azul-pale);
   transform: scale(1.05);
    }
+/* ============================================================== */
+/* VÍDEO DE FUNDO                                                 */
+/* ============================================================== */
+#video-fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Faz o vídeo preencher a tela inteira sem distorcer */
+  z-index: -1; /* Joga o vídeo para trás de todo o conteúdo */
+  opacity: 0.15; /* Deixa o vídeo bem apagado (15% de opacidade) */
+  pointer-events: none; /* Impede que clique no vídeo sem querer */
+}
+
+/* Ajuste para o fundo do corpo ficar transparente e deixar o vídeo aparecer */
+body {
+  background-color: transparent !important;
+}
+
+/* Ajuste nos cartões e no topo para ficarem com fundo sólido e o texto não misturar com o vídeo */
+.masthead, .summary, .card-conselheiro, .toolbar {
+  backdrop-filter: blur(8px); /* Efeito de vidro embaçado atrás dos elementos */
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Opcional: Se quiser que o fundo do site no modo escuro combine com o vídeo */
+:root[data-theme="dark"] body {
+  background-color: #081c2e !important; /* A cor azul escura por baixo do vídeo */
+}
+:root[data-theme="light"] body {
+  background-color: #ffffff !important; /* A cor branca por baixo do vídeo */
+}
