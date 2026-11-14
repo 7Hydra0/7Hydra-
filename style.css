@@ -24,7 +24,7 @@
   --azul-escuro: #00213d;
   --azul-pale: #f0f4f8;
   --verde: #00824a;
-  --dourado: #c99b3b; /* Nova cor extraída do brasão */
+  --dourado: #c99b3b; 
   --texto: #2c3338;
   --texto-2: #5a6672;
   --borda: #e1e7ed;
@@ -37,13 +37,13 @@
   color-scheme: light;
 }
 
-/* Cores - MODO AZUL OFICIAL (Com toques de dourado) */
+/* Cores - MODO AZUL OFICIAL */
 :root[data-theme="dark"] {
   --azul-senado: #7cb6e8; 
   --azul-escuro: #1a4d80;
   --azul-pale: #102a43; 
   --verde: #4fd394;
-  --dourado: #e5b95a; /* Dourado mais claro para o fundo escuro */
+  --dourado: #e5b95a; 
   --texto: #e8ecf0;
   --texto-2: #a5b9cc;
   --borda: #2a4b6b;
@@ -175,7 +175,7 @@ body {
 
 /* ESTILO DA IMAGEM DO BRASÃO */
 .masthead .mark {
-  width: 150px; /* Largura fixa da coluna da imagem */
+  width: 150px;
   text-align: center;
   border-right: 1px solid var(--borda);
   padding: 1rem;
@@ -402,28 +402,35 @@ h2 {
   :root { --recuo: 1.5em; }
   .toolbar { top: auto; bottom: 1.5rem; right: 1.5rem; padding: .35rem; }
   .back-to-top { bottom: 5.5rem; right: 1.5rem; width: 2.75rem; height: 2.75rem; }
-  /* Ajuste do Brasão no Celular */
-.masthead td { 
-  display: block; 
-  width: 100%; 
-  text-align: center; 
-  padding: 1.5rem 1rem; 
-}
-.masthead .mark { 
-  border-right: 0; 
-  border-bottom: 1px solid var(--borda); 
-  padding-bottom: 1.5rem; 
-  margin: 0 auto; /* Centraliza a coluna da imagem */
-}
-.brasao {
-  margin: 0 auto; /* Centraliza a imagem do brasão */
-}
-.masthead .institution { 
-  padding-inline-start: 0; 
-  text-align: center; 
-  padding-top: 1rem; /* Dá um espacinho entre a imagem e o texto */
-}
   
+  /* --- AJUSTE DE CENTRALIZAÇÃO NO CELULAR --- */
+  .masthead td { 
+    display: block; 
+    width: 100%; 
+    text-align: center; 
+    padding: 1.5rem 1rem; 
+  }
+  
+  .masthead .mark { 
+    border-right: 0; 
+    border-bottom: 1px solid var(--borda); 
+    padding-bottom: 1.5rem; 
+    margin: 0 auto; /* Centraliza a coluna da imagem */
+    width: 100%;
+  }
+  
+  .brasao {
+    margin: 0 auto; /* Garante a imagem no centro */
+    max-width: 140px; /* Deixa a logo um pouco maior no celular */
+  }
+  
+  .masthead .institution { 
+    padding-inline-start: 0; 
+    text-align: center; 
+    padding-top: 1.5rem; /* Espaço entre a logo e o texto */
+  }
+  /* ----------------------------------------- */
+
   .summary { width: 100%; margin-inline-start: 0; }
   h2 { padding-inline-end: 1rem; }
   .heading-anchor { display: none; }
