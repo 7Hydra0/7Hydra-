@@ -5,51 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Carta Institucional do Conselho Master</title>
 
-  <!-- Script síncrono: aplica tema/fonte ANTES do CSS pintar (sem FOUC) -->
   <script>
     (function () {
       try {
         var stored = localStorage.getItem('carta:theme');
-        var prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.dataset.theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = stored || 'dark';
         var scale = parseFloat(localStorage.getItem('carta:font-scale'));
         if (scale) document.documentElement.style.setProperty('--font-scale', scale);
-      } catch (e) { /* modo privado / storage bloqueado */ }
+      } catch (e) { 
+        document.documentElement.dataset.theme = 'dark';
+      }
     })();
   </script>
 
-  <link rel="stylesheet" href="carta.css">
-  <script src="carta.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
 
   <div class="progress" id="progress" aria-hidden="true"></div>
 
   <div class="toolbar" role="toolbar" aria-label="Ferramentas do documento">
-    <button type="button" class="tool-btn" data-action="font-down"
-            title="Diminuir fonte (−)" aria-label="Diminuir fonte">
+    <button type="button" class="tool-btn" data-action="font-down" title="Diminuir fonte (−)" aria-label="Diminuir fonte">
       <span class="font-icon is-small" aria-hidden="true">A</span>
     </button>
-    <button type="button" class="tool-btn" data-action="font-up"
-            title="Aumentar fonte (+)" aria-label="Aumentar fonte">
+    <button type="button" class="tool-btn" data-action="font-up" title="Aumentar fonte (+)" aria-label="Aumentar fonte">
       <span class="font-icon is-large" aria-hidden="true">A</span>
     </button>
-    <button type="button" class="tool-btn" data-action="theme"
-            title="Alternar tema (T)" aria-label="Alternar tema">
-      <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <button type="button" class="tool-btn" data-action="theme" title="Alternar tema (T)" aria-label="Alternar tema">
+      <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
         <circle cx="12" cy="12" r="4"/>
         <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
       </svg>
-      <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
       </svg>
     </button>
-    <button type="button" class="tool-btn" data-action="print"
-            title="Imprimir (P)" aria-label="Imprimir documento">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <button type="button" class="tool-btn" data-action="print" title="Imprimir (P)" aria-label="Imprimir documento">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polyline points="6 9 6 2 18 2 18 9"/>
         <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
         <rect x="6" y="14" width="12" height="8"/>
@@ -60,7 +53,10 @@
   <header class="page-header">
     <table class="masthead">
       <tr>
-        <td class="mark">M</td>
+        <!-- AQUI ENTRA A SUA IMAGEM -->
+        <td class="mark">
+          <img src="logo.png" alt="Brasão Conselho Master" class="brasao">
+        </td>
         <td class="institution">CONSELHO MASTER<br>
           <small>Administração, orientação e preservação institucional</small>
         </td>
@@ -136,14 +132,12 @@
   </div>
 
   <button type="button" class="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <polyline points="18 15 12 9 6 15"/>
     </svg>
   </button>
 
-  <script src="script.js"></script>
   <div class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-<link rel="stylesheet" href="style.css">
+
 </body>
-   </html>
+</html>
