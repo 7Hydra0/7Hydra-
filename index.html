@@ -1,84 +1,148 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Carta Institucional do Conselho Master</title>
-<style>
-  body { background:#fff; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:10pt; margin:28px auto; width:70%; line-height:1.45; }
-  .masthead { width:100%; border-collapse:collapse; margin:0 auto 24px; }
-  .masthead td { vertical-align:middle; }
-  .mark { width:14%; text-align:center; color:#808000; font-family:Georgia,serif; font-size:28pt; font-weight:bold; }
-  .institution { width:86%; text-align:center; color:#808000; font-weight:bold; font-size:14pt; }
-  .institution small { font-size:11pt; }
-  .doc-title { text-align:center; color:#000080; font-weight:bold; font-size:10pt; margin:22px 0 28px; }
-  .summary { width:50%; margin-left:50%; color:maroon; text-align:justify; font-size:10pt; }
-  p { text-align:justify; text-indent:30px; margin:13px 0; }
-  h2 { color:#000080; font-size:10pt; text-align:left; margin:22px 0 8px; font-weight:bold; }
-  .clause { text-indent:30px; margin:8px 0; }
-  .closing { margin-top:25px; }
-  .motto { text-align:center; color:#808000; font-weight:bold; margin-top:28px; text-indent:0; }
-  @media (max-width:700px) { body { width:92%; margin:18px auto; } .mark { font-size:20pt; } .institution { font-size:11pt; } }
-  @media print { body { width:85%; margin:20mm auto; } }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carta Institucional do Conselho Master</title>
+
+  <!-- Script síncrono: aplica tema/fonte ANTES do CSS pintar (sem FOUC) -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('carta:theme');
+        var prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = stored || (prefersDark ? 'dark' : 'light');
+        var scale = parseFloat(localStorage.getItem('carta:font-scale'));
+        if (scale) document.documentElement.style.setProperty('--font-scale', scale);
+      } catch (e) { /* modo privado / storage bloqueado */ }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="carta.css">
+  <script src="carta.js" defer></script>
 </head>
 <body>
-<table class="masthead">
-<tr>
-  <td class="mark">M</td>
-  <td class="institution">CONSELHO MASTER<br><small>Administração, orientação e preservação institucional</small></td>
-</tr>
-</table>
 
-<div class="doc-title">CARTA INSTITUCIONAL DO CONSELHO MASTER</div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
-<div class="summary">Institui o Conselho Master como órgão responsável pela administração, orientação e preservação da organização, estabelece sua composição, competências, diretrizes e normas de funcionamento.</div>
+  <div class="toolbar" role="toolbar" aria-label="Ferramentas do documento">
+    <button type="button" class="tool-btn" data-action="font-down"
+            title="Diminuir fonte (−)" aria-label="Diminuir fonte">
+      <span class="font-icon is-small" aria-hidden="true">A</span>
+    </button>
+    <button type="button" class="tool-btn" data-action="font-up"
+            title="Aumentar fonte (+)" aria-label="Aumentar fonte">
+      <span class="font-icon is-large" aria-hidden="true">A</span>
+    </button>
+    <button type="button" class="tool-btn" data-action="theme"
+            title="Alternar tema (T)" aria-label="Alternar tema">
+      <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+      <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <button type="button" class="tool-btn" data-action="print"
+            title="Imprimir (P)" aria-label="Imprimir documento">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="6 9 6 2 18 2 18 9"/>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+        <rect x="6" y="14" width="12" height="8"/>
+      </svg>
+    </button>
+  </div>
 
-<p>Fica instituído o Conselho Master, órgão responsável pela administração, orientação e preservação da organização.</p>
+  <header class="page-header">
+    <table class="masthead">
+      <tr>
+        <td class="mark">M</td>
+        <td class="institution">CONSELHO MASTER<br>
+          <small>Administração, orientação e preservação institucional</small>
+        </td>
+      </tr>
+    </table>
+  </header>
 
-<h2>I — COMPOSIÇÃO</h2>
-<p class="clause">O Conselho será formado por duas cadeiras permanentes e demais cadeiras ordinárias.</p>
-<p class="clause">As cadeiras permanentes representam a autoridade superior e a continuidade institucional.</p>
-<p class="clause">Os demais conselheiros serão admitidos mediante aprovação.</p>
+  <div class="layout">
+    <aside class="toc" aria-label="Sumário">
+      <h2 class="toc-title">Sumário</h2>
+      <ol class="toc-list">
+        <li><a href="#composicao">I — Composição</a></li>
+        <li><a href="#diretrizes">II — Diretrizes</a></li>
+        <li><a href="#deliberacoes">III — Deliberações e Autoridade</a></li>
+        <li><a href="#responsabilidade">IV — Responsabilidade e Convivência</a></li>
+        <li><a href="#conduta">V — Conduta</a></li>
+        <li><a href="#competencias">VI — Competências</a></li>
+        <li><a href="#disposicao">VII — Disposição Final</a></li>
+      </ol>
+    </aside>
 
-<h2>II — DIRETRIZES</h2>
-<p class="clause">Preservar a unidade e os interesses coletivos.</p>
-<p class="clause">Coordenar os diferentes núcleos e suas lideranças.</p>
-<p class="clause">Estabelecer orientações e normas gerais.</p>
-<p class="clause">Mediar conflitos e deliberar sobre questões relevantes.</p>
-<p class="clause">Promover organização, responsabilidade e cooperação.</p>
+    <main class="document">
+      <div class="doc-title">Carta Institucional do Conselho Master</div>
 
-<h2>III — DELIBERAÇÕES E AUTORIDADE</h2>
-<p class="clause">As decisões deverão buscar consenso; na ausência dele, haverá votação.</p>
-<p class="clause">Cada conselheiro terá direito a um voto.</p>
-<p class="clause">As duas cadeiras permanentes possuem poder individual de veto.</p>
-<p class="clause">As cadeiras permanentes poderão emitir determinações extraordinárias.</p>
-<p class="clause">Alterações estruturais permanentes exigirão concordância das duas cadeiras permanentes.</p>
-<p class="clause">As decisões oficiais deverão ser registradas.</p>
+      <div class="summary">Institui o Conselho Master como órgão responsável pela administração, orientação e preservação da organização, estabelece sua composição, competências, diretrizes e normas de funcionamento.</div>
 
-<h2>IV — RESPONSABILIDADE E CONVIVÊNCIA</h2>
-<p class="clause">Todo integrante deverá respeitar os demais membros, independentemente de cargo ou posição.</p>
-<p class="clause">Empréstimos de dinheiro entre integrantes deverão ter condições e prazos de devolução acordados previamente.</p>
-<p class="clause">Quem assumir uma dívida deverá cumprir o compromisso estabelecido.</p>
-<p class="clause">O descumprimento de acordos financeiros deverá ser tratado com responsabilidade e diálogo.</p>
-<p class="clause">É proibido utilizar o nome da Master para solicitar dinheiro, contrair dívidas ou assumir compromissos sem autorização.</p>
-<p class="clause">Ninguém será obrigado a emprestar dinheiro ou assumir responsabilidades financeiras por outro integrante.</p>
-<p class="clause">Fraudes, golpes, ameaças e má-fé serão considerados violações graves de conduta.</p>
+      <p>Fica instituído o Conselho Master, órgão responsável pela administração, orientação e preservação da organização.</p>
 
-<h2>V — CONDUTA</h2>
-<p class="clause">Respeito mútuo e responsabilidade institucional são obrigatórios.</p>
-<p class="clause">Divergências deverão ser tratadas de maneira apropriada.</p>
-<p class="clause">É vedado o abuso de autoridade e a utilização do Conselho para interesses particulares.</p>
-<p class="clause">Todo integrante terá direito de manifestação e defesa.</p>
-<p class="clause">Infrações poderão resultar em advertência, afastamento ou desligamento, conforme sua gravidade.</p>
+      <h2 id="composicao">I — Composição</h2>
+      <p class="clause">O Conselho será formado por duas cadeiras permanentes e demais cadeiras ordinárias.</p>
+      <p class="clause">As cadeiras permanentes representam a autoridade superior e a continuidade institucional.</p>
+      <p class="clause">Os demais conselheiros serão admitidos mediante aprovação.</p>
 
-<h2>VI — COMPETÊNCIAS</h2>
-<p>Compete ao Conselho estabelecer diretrizes, avaliar admissões, acompanhar lideranças, resolver conflitos, fiscalizar normas e orientar os rumos da organização.</p>
+      <h2 id="diretrizes">II — Diretrizes</h2>
+      <p class="clause">Preservar a unidade e os interesses coletivos.</p>
+      <p class="clause">Coordenar os diferentes núcleos e suas lideranças.</p>
+      <p class="clause">Estabelecer orientações e normas gerais.</p>
+      <p class="clause">Mediar conflitos e deliberar sobre questões relevantes.</p>
+      <p class="clause">Promover organização, responsabilidade e cooperação.</p>
 
-<h2>VII — DISPOSIÇÃO FINAL</h2>
-<p>O Conselho deverá atuar como instituição de estabilidade, organização e continuidade. Suas deliberações serão coletivas, respeitando a autoridade superior e o poder de veto das duas cadeiras permanentes.</p>
+      <h2 id="deliberacoes">III — Deliberações e Autoridade</h2>
+      <p class="clause">As decisões deverão buscar consenso; na ausência dele, haverá votação.</p>
+      <p class="clause">Cada conselheiro terá direito a um voto.</p>
+      <p class="clause">As duas cadeiras permanentes possuem poder individual de veto.</p>
+      <p class="clause">As cadeiras permanentes poderão emitir determinações extraordinárias.</p>
+      <p class="clause">Alterações estruturais permanentes exigirão concordância das duas cadeiras permanentes.</p>
+      <p class="clause">As decisões oficiais deverão ser registradas.</p>
 
-<link rel="stylesheet" href="style.css">
-<p class="motto">CONSELHO MASTER<br>Unidade, autoridade, responsabilidade e continuidade.</p>
+      <h2 id="responsabilidade">IV — Responsabilidade e Convivência</h2>
+      <p class="clause">Todo integrante deverá respeitar os demais membros, independentemente de cargo ou posição.</p>
+      <p class="clause">Empréstimos de dinheiro entre integrantes deverão ter condições e prazos de devolução acordados previamente.</p>
+      <p class="clause">Quem assumir uma dívida deverá cumprir o compromisso estabelecido.</p>
+      <p class="clause">O descumprimento de acordos financeiros deverá ser tratado com responsabilidade e diálogo.</p>
+      <p class="clause">É proibido utilizar o nome da Master para solicitar dinheiro, contrair dívidas ou assumir compromissos sem autorização.</p>
+      <p class="clause">Ninguém será obrigado a emprestar dinheiro ou assumir responsabilidades financeiras por outro integrante.</p>
+      <p class="clause">Fraudes, golpes, ameaças e má-fé serão considerados violações graves de conduta.</p>
+
+      <h2 id="conduta">V — Conduta</h2>
+      <p class="clause">Respeito mútuo e responsabilidade institucional são obrigatórios.</p>
+      <p class="clause">Divergências deverão ser tratadas de maneira apropriada.</p>
+      <p class="clause">É vedado o abuso de autoridade e a utilização do Conselho para interesses particulares.</p>
+      <p class="clause">Todo integrante terá direito de manifestação e defesa.</p>
+      <p class="clause">Infrações poderão resultar em advertência, afastamento ou desligamento, conforme sua gravidade.</p>
+
+      <h2 id="competencias">VI — Competências</h2>
+      <p>Compete ao Conselho estabelecer diretrizes, avaliar admissões, acompanhar lideranças, resolver conflitos, fiscalizar normas e orientar os rumos da organização.</p>
+
+      <h2 id="disposicao">VII — Disposição Final</h2>
+      <p>O Conselho deverá atuar como instituição de estabilidade, organização e continuidade. Suas deliberações serão coletivas, respeitando a autoridade superior e o poder de veto das duas cadeiras permanentes.</p>
+
+      <p class="motto">CONSELHO MASTER<br>Unidade, autoridade, responsabilidade e continuidade.</p>
+    </main>
+  </div>
+
+  <button type="button" class="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <div class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
 </body>
 </html>
