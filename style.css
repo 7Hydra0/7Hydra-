@@ -402,11 +402,27 @@ h2 {
   :root { --recuo: 1.5em; }
   .toolbar { top: auto; bottom: 1.5rem; right: 1.5rem; padding: .35rem; }
   .back-to-top { bottom: 5.5rem; right: 1.5rem; width: 2.75rem; height: 2.75rem; }
-  
   /* Ajuste do Brasão no Celular */
-  .masthead td { display: block; width: 100%; text-align: center; padding: 1rem; }
-  .masthead .mark { border-right: 0; border-bottom: 1px solid var(--borda); padding-bottom: 1.5rem; }
-  .masthead .institution { padding-inline-start: 0; text-align: center; }
+.masthead td { 
+  display: block; 
+  width: 100%; 
+  text-align: center; 
+  padding: 1.5rem 1rem; 
+}
+.masthead .mark { 
+  border-right: 0; 
+  border-bottom: 1px solid var(--borda); 
+  padding-bottom: 1.5rem; 
+  margin: 0 auto; /* Centraliza a coluna da imagem */
+}
+.brasao {
+  margin: 0 auto; /* Centraliza a imagem do brasão */
+}
+.masthead .institution { 
+  padding-inline-start: 0; 
+  text-align: center; 
+  padding-top: 1rem; /* Dá um espacinho entre a imagem e o texto */
+}
   
   .summary { width: 100%; margin-inline-start: 0; }
   h2 { padding-inline-end: 1rem; }
