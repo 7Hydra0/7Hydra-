@@ -24,7 +24,43 @@
 <body>
 
   <div class="progress" id="progress" aria-hidden="true"></div>
+<div class="toolbar" role="toolbar" aria-label="Ferramentas do documento">
+  <button type="button" class="tool-btn" data-action="font-down" title="Diminuir fonte (−)" aria-label="Diminuir fonte">
+    <span class="font-icon is-small" aria-hidden="true">A</span>
+  </button>
+  <button type="button" class="tool-btn" data-action="font-up" title="Aumentar fonte (+)" aria-label="Aumentar fonte">
+    <span class="font-icon is-large" aria-hidden="true">A</span>
+  </button>
+  <button type="button" class="tool-btn" data-action="theme" title="Alternar tema (T)" aria-label="Alternar tema">
+    <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+    <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+  
+  <!-- ADICIONE ESTE BOTÃO DE MÚSICA AQUI -->
+  <button type="button" class="tool-btn" id="btn-music" data-action="music" title="Tocar/Pausar Música" aria-label="Tocar Música">
+    <svg class="icon icon-music-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+    </svg>
+    <svg class="icon icon-music-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: none;">
+      <rect x="6" y="4" width="4" height="16"></rect>
+      <rect x="14" y="4" width="4" height="16"></rect>
+    </svg>
+  </button>
+  <!-- FIM DO BOTÃO DE MÚSICA -->
 
+  <button type="button" class="tool-btn" data-action="print" title="Imprimir (P)" aria-label="Imprimir documento">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="6 9 6 2 18 2 18 9"/>
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+      <rect x="6" y="14" width="12" height="8"/>
+    </svg>
+  </button>
+</div>
   <div class="toolbar" role="toolbar" aria-label="Ferramentas do documento">
     <button type="button" class="tool-btn" data-action="font-down" title="Diminuir fonte (−)" aria-label="Diminuir fonte">
       <span class="font-icon is-small" aria-hidden="true">A</span>
@@ -274,6 +310,9 @@
   </button>
 
   <div class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<body>
 
+  
+  <audio id="bg-music" src="musica.mp3" loop></audio>
 </body>
             </html>
