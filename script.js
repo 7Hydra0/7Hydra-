@@ -87,7 +87,27 @@
   window.addEventListener('resize', onScroll, { passive: true });
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+/* ----------------------------------------------------- 6. CONTROLE DE MÚSICA */
+const music = document.getElementById('bg-music');
+const btnMusic = document.getElementById('btn-music');
+const iconPlay = btnMusic.querySelector('.icon-music-play');
+const iconPause = btnMusic.querySelector('.icon-music-pause');
 
+if (btnMusic && music) {
+  btnMusic.addEventListener('click', () => {
+    if (music.paused) {
+      music.play();
+      iconPlay.style.display = 'none';
+      iconPause.style.display = 'block';
+      showToast('Música ativada');
+    } else {
+      music.pause();
+      iconPlay.style.display = 'block';
+      iconPause.style.display = 'none';
+      showToast('Música pausada');
+    }
+  });
+}
   document.querySelectorAll('.tool-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       switch (btn.dataset.action) {
