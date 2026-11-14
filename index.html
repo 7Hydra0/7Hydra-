@@ -23,14 +23,22 @@
 </head>
 <body>
 
+  <!-- TELA DE ENTRADA (A MÁGICA ACONTECE AQUI) -->
+  <div id="tela-entrada">
+    <div class="entrada-conteudo">
+      <img src="logo.png" alt="Brasão" class="entrada-logo">
+      <h1>CONSELHO MASTER</h1>
+      <p>Administração, orientação e preservação institucional</p>
+      <button id="btn-entrar">Entrar no Conselho</button>
+    </div>
+  </div>
+
   <!-- VÍDEO DE FUNDO -->
   <video autoplay loop muted playsinline id="video-fundo">
     <source src="fundo.mp4" type="video/mp4">
   </video>
 
-  <!-- A tag de música continua aqui -->
-  <audio id="bg-music" src="musica.mp3" loop></audio>
-  <!-- TAG DE MÚSICA (Coloque o arquivo musica.mp3 no GitHub) -->
+  <!-- MÚSICA -->
   <audio id="bg-music" src="musica.mp3" loop></audio>
 
   <div class="progress" id="progress" aria-hidden="true"></div>
@@ -52,7 +60,6 @@
       </svg>
     </button>
     
-    <!-- BOTÃO DE MÚSICA -->
     <button type="button" class="tool-btn" id="btn-music" data-action="music" title="Tocar/Pausar Música" aria-label="Tocar Música">
       <svg class="icon icon-music-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -76,7 +83,6 @@
     <table class="masthead">
       <tr>
         <td class="mark">
-          <!-- Imagem do Brasão -->
           <img src="logo.png" alt="Brasão Conselho Master" class="brasao">
         </td>
         <td class="institution">CONSELHO MASTER<br>
@@ -87,8 +93,8 @@
   </header>
 
   <div class="layout">
-    <aside class="toc" aria-label="segmentos">
-      <h2 class="toc-title">segmentos</h2>
+    <aside class="toc" aria-label="Sumário">
+      <h2 class="toc-title">Segmentos</h2>
       <ol class="toc-list">
         <li><a href="#composicao">I — Composição</a></li>
         <li><a href="#diretrizes">II — Diretrizes</a></li>
@@ -149,21 +155,15 @@
       <h2 id="disposicao">VII — Disposição Final</h2>
       <p>O Conselho deverá atuar como instituição de estabilidade, organização e continuidade. Suas deliberações serão coletivas, respeitando a autoridade superior e o poder de veto das duas cadeiras permanentes.</p>
 
-      <!-- ============================================================== -->
-      <!-- SEÇÃO DE CONSELHEIROS -->
-      <!-- ============================================================== -->
       <section class="conselheiros" aria-label="Membros do Conselho">
         <h2 class="conselheiros-title">Composição do Conselho</h2>
         
-        <!-- CADEIRAS VITALÍCIAS (DESTAQUE) -->
         <div class="categoria-membros">
           <h3 class="categoria-titulo">Cadeiras Permanentes</h3>
           <div class="grid-permanentes">
             
-            <!-- VITALÍCIO 1: IMP (GIF) -->
             <div class="card-conselheiro destaque-permanente">
               <div class="foto-conselheiro">
-                <!-- Foto em GIF -->
                 <img src="foto-imp.gif" alt="Imp" onerror="this.src='https://ui-avatars.com/api/?name=Imp&background=102a43&color=e5b95a&size=120'">
               </div>
               <div class="info-conselheiro">
@@ -172,10 +172,8 @@
               </div>
             </div>
 
-            <!-- VITALÍCIO 2: VUPEX (GIF) -->
             <div class="card-conselheiro destaque-permanente">
               <div class="foto-conselheiro">
-                <!-- Foto em GIF -->
                 <img src="foto-vupex.gif" alt="Vupex" onerror="this.src='https://ui-avatars.com/api/?name=Vupex&background=102a43&color=e5b95a&size=120'">
               </div>
               <div class="info-conselheiro">
@@ -187,12 +185,10 @@
           </div>
         </div>
 
-        <!-- CONSELHEIROS ORDINÁRIOS (OS 8) -->
         <div class="categoria-membros">
           <h3 class="categoria-titulo">Conselheiros Ordinários</h3>
           <div class="grid-ordinarios">
             
-            <!-- ORDINÁRIO 1 -->
             <div class="card-conselheiro">
               <div class="foto-conselheiro">
                 <img src="foto-ordinario-1.jpg" alt="Conselheiro 1" onerror="this.src='https://ui-avatars.com/api/?name=Conselheiro+1&background=2a4b6b&color=fff'">
@@ -203,7 +199,6 @@
               </div>
             </div>
 
-            <!-- ORDINÁRIO 2 -->
             <div class="card-conselheiro">
               <div class="foto-conselheiro">
                 <img src="foto-ordinario-2.jpg" alt="Conselheiro 2" onerror="this.src='https://ui-avatars.com/api/?name=Conselheiro+2&background=2a4b6b&color=fff'">
@@ -214,7 +209,6 @@
               </div>
             </div>
 
-            <!-- ORDINÁRIO 3 -->
             <div class="card-conselheiro">
               <div class="foto-conselheiro">
                 <img src="foto-ordinario-3.jpg" alt="Conselheiro 3" onerror="this.src='https://ui-avatars.com/api/?name=Conselheiro+3&background=2a4b6b&color=fff'">
@@ -225,7 +219,6 @@
               </div>
             </div>
 
-            <!-- ORDINÁRIO 4 -->
             <div class="card-conselheiro">
               <div class="foto-conselheiro">
                 <img src="foto-ordinario-4.jpg" alt="Conselheiro 4" onerror="this.src='https://ui-avatars.com/api/?name=Conselheiro+4&background=2a4b6b&color=fff'">
@@ -236,7 +229,6 @@
               </div>
             </div>
 
-            <!-- ORDINÁRIO 5 -->
             <div class="card-conselheiro">
               <div class="foto-conselheiro">
                 <img src="foto-ordinario-5.jpg" alt="Conselheiro 5" onerror="this.src='https://ui-avatars.com/api/?name=Conselheiro+5&background=2a4b6b&color=fff'">
@@ -247,7 +239,6 @@
               </div>
             </div>
 
-            <!-- ORDINÁRIO 6 -->
             <div class="card-conselheiro">
               <div class="foto-conselheiro">
                 <img src="foto-ordinario-6.jpg" alt="Conselheiro 6" onerror="this.src='https://ui-avatars.com/api/?name=Conselheiro+6&background=2a4b6b&color=fff'">
@@ -258,7 +249,6 @@
               </div>
             </div>
 
-            <!-- ORDINÁRIO 7 -->
             <div class="card-conselheiro">
               <div class="foto-conselheiro">
                 <img src="foto-ordinario-7.jpg" alt="Conselheiro 7" onerror="this.src='https://ui-avatars.com/api/?name=Conselheiro+7&background=2a4b6b&color=fff'">
@@ -269,7 +259,6 @@
               </div>
             </div>
 
-            <!-- ORDINÁRIO 8 -->
             <div class="card-conselheiro">
               <div class="foto-conselheiro">
                 <img src="foto-ordinario-8.jpg" alt="Conselheiro 8" onerror="this.src='https://ui-avatars.com/api/?name=Conselheiro+8&background=2a4b6b&color=fff'">
@@ -283,7 +272,6 @@
           </div>
         </div>
       </section>
-      <!-- ============================================================== -->
 
       <p class="motto">CONSELHO MASTER<br>Unidade, autoridade, responsabilidade e continuidade.</p>
     </main>
@@ -298,4 +286,4 @@
   <div class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
 </body>
-                                                                                                                                   </html>
+      </html>                                                                                                              </html>
