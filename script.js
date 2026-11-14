@@ -32,34 +32,7 @@
     toastTimer = setTimeout(() => toast.classList.remove('visible'), ms);
   }
 
-  /* ----------------------------------------------------- 4. COPIAR LINK */
-  async function copyText(text) {
-    try { await navigator.clipboard.writeText(text); return true; } 
-    catch (_) {
-      const ta = document.createElement('textarea');
-      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta); ta.select();
-      let ok = false; try { ok = document.execCommand('copy'); } catch (_) {}
-      document.body.removeChild(ta); return ok;
-    }
-  }
-
-  headings.forEach(h => {
-    const a = document.createElement('a');
-    a.className = 'heading-anchor'; a.href = '#' + h.id; a.textContent = '#';
-    a.setAttribute('aria-label', 'Copiar link'); a.title = 'Copiar link';
-    a.addEventListener('click', async (e) => {
-      e.preventDefault();
-      const url = location.origin + location.pathname + location.search + '#' + h.id;
-      const ok = await copyText(url);
-      showToast(ok ? 'Link copiado' : 'Erro ao copiar');
-      history.replaceState(null, '', '#' + h.id);
-      h.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    h.appendChild(a);
-  });
-
-  /* ----------------------------------------------------- 5. SCROLL E PROGRESSO */
+  /* ----------------------------------------------------- 4. SCROLL E PROGRESSO */
   const linkMap = new Map();
   tocLinks.forEach(a => {
     const id = a.getAttribute('href').slice(1);
@@ -94,31 +67,75 @@
 
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  /* ----------------------------------------------------- 6. CONTROLE DE MÚSICA */
+  /* ----------------------------------------------------- 5. CONTROLE DE MÚSICA */
   const music = document.getElementById('bg-music');
   const btnMusic = document.getElementById('btn-music');
-  const iconPlay = btnMusic.querySelector('.icon-music-play');
-  const iconPause = btnMusic.querySelector('.icon-music-pause');
-
+  
   if (btnMusic && music) {
-    btnMusic.addEventListener('click', () => {
-      if (music.paused) {
-        music.play();
+    const iconPlay = btnMusic.querySelector('.icon-music-play');
+    const iconPause = btnMusic.querySelector('.icon-music-pause');
+
+    function updateMusicUI(isPlaying) {
+      if (isPlaying) {
         iconPlay.style.display = 'none';
         iconPause.style.display = 'block';
         btnMusic.classList.add('is-playing');
-        showToast('Música ativada');
       } else {
-        music.pause();
         iconPlay.style.display = 'block';
         iconPause.style.display = 'none';
         btnMusic.classList.remove('is-playing');
+      }
+    }
+
+    // VOLUME MÁXIMO
+    music.volume = 1.0; 
+
+    // Tenta tocar imediatamente ao carregar
+    let playPromise = music.play();
+
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        // Tocou de primeira (raro, mas possível em alguns PCs)
+        updateMusicUI(true);
+      }).catch(() => {
+        // O navegador bloqueou. Vamos disparar no primeiro toque/rolagem
+        const startAudioOnInteract = () => {
+          music.play().then(() => {
+            updateMusicUI(true);
+            showToast('Música ativada');
+          }).catch(() => {});
+          
+          // Remove os escutadores após o primeiro toque
+          document.removeEventListener('click', startAudioOnInteract);
+          document.removeEventListener('touchstart', startAudioOnInteract);
+          document.removeEventListener('scroll', startAudioOnInteract);
+          document.removeEventListener('keydown', startAudioOnInteract);
+        };
+        
+        document.addEventListener('click', startAudioOnInteract);
+        document.addEventListener('touchstart', startAudioOnInteract);
+        document.addEventListener('scroll', startAudioOnInteract);
+        document.addEventListener('keydown', startAudioOnInteract);
+      });
+    }
+
+    // Controle manual do botão Play/Pause
+    btnMusic.addEventListener('click', (e) => {
+      e.stopPropagation(); // Evita disparar o startAudioOnInteract duplicado
+      
+      if (music.paused) {
+        music.play();
+        updateMusicUI(true);
+        showToast('Música ativada');
+      } else {
+        music.pause();
+        updateMusicUI(false);
         showToast('Música pausada');
       }
     });
   }
 
-  /* ----------------------------------------------------- 7. BOTÕES E TECLADO */
+  /* ----------------------------------------------------- 6. BOTÕES E TECLADO */
   document.querySelectorAll('.tool-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       switch (btn.dataset.action) {
@@ -143,7 +160,7 @@
     }
   });
 
-  /* ----------------------------------------------------- 8. ESTADO INICIAL */
+  /* ----------------------------------------------------- 7. ESTADO INICIAL */
   if (!root.dataset.theme) root.dataset.theme = 'dark';
   onScroll();
-})(); 
+})();
