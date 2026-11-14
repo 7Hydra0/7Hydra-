@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CARTA INSTITUCIONAL — DESIGN PREMIUM (AZUL OFICIAL & BRANCO)
+   CARTA INSTITUCIONAL — DESIGN PREMIUM (EFEITO VIDRO & VÍDEO)
    ========================================================================== */
 
 /* ---------------------------------------------------------------- 1. TOKENS */
@@ -18,44 +18,44 @@
   --respiro: clamp(1.25rem, 4vw, 2.5rem);
   --recuo: 1.75em;
 
-  /* Cores - MODO BRANCO */
+  /* Cores - MODO BRANCO (Vidro Claro) */
   --azul-senado: #00305c;
   --azul-escuro: #00213d;
-  --azul-pale: #f0f4f8;
+  --azul-pale: rgba(255, 255, 255, 0.75); /* Vidro branco transparente */
   --verde: #00824a;
   --dourado: #c99b3b; 
   --texto: #2c3338;
   --texto-2: #5a6672;
-  --borda: #e1e7ed;
-  --papel: #ffffff;
+  --borda: rgba(0, 0, 0, 0.1);
+  
   --surface-blur: rgba(255, 255, 255, 0.85);
   --shadow-float: 0 8px 30px rgba(0, 48, 92, 0.08);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
   --btn-primary-bg: #00305c;
   --btn-primary-fg: #ffffff;
   color-scheme: light;
 }
 
-/* Cores - MODO AZUL OFICIAL */
+/* Cores - MODO AZUL OFICIAL (Vidro Fumê) */
 :root[data-theme="dark"] {
   --azul-senado: #7cb6e8; 
   --azul-escuro: #1a4d80;
-  --azul-pale: #102a43; 
+  --azul-pale: rgba(16, 42, 67, 0.65); /* Vidro escuro transparente (65% de opacidade) */
   --verde: #4fd394;
   --dourado: #e5b95a; 
   --texto: #e8ecf0;
   --texto-2: #a5b9cc;
-  --borda: #2a4b6b;
-  --papel: #081c2e; 
+  --borda: rgba(255, 255, 255, 0.1);
+  
   --surface-blur: rgba(8, 28, 46, 0.85);
-  --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.4);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.2);
+  --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
   --btn-primary-bg: #7cb6e8;
   --btn-primary-fg: #081c2e;
   color-scheme: dark;
 }
 
-/* ------------------------------------------------------------------ 2. BASE */
+/* ------------------------------------------------------------------ 2. BASE E VÍDEO */
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
@@ -68,7 +68,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--papel);
+  background-color: #081c2e; /* Cor base caso o vídeo demore a carregar */
   color: var(--texto);
   font-family: var(--serif);
   font-size: var(--fs-corpo);
@@ -79,6 +79,24 @@ body {
   hyphens: auto;
   overflow-wrap: break-word;
   transition: background-color .4s ease, color .4s ease;
+}
+
+/* O VÍDEO DE FUNDO */
+#video-fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+  opacity: 0.35; /* Deixa o vídeo visível, mas não ofuscante */
+  pointer-events: none;
+}
+
+/* Filtro para garantir a leitura no Modo Claro */
+:root[data-theme="light"] #video-fundo {
+  opacity: 0.1;
 }
 
 ::selection { background: var(--dourado); color: #fff; }
@@ -109,7 +127,7 @@ body {
   border-radius: 999px;
   box-shadow: var(--shadow-float);
   z-index: 50;
-  transition: background-color .4s ease, border-color .4s ease;
+  transition: all .4s ease;
 }
 
 .tool-btn {
@@ -137,12 +155,20 @@ body {
 [data-theme="light"] .icon-sun { display: none; }
 [data-theme="dark"] .icon-moon { display: none; }
 
+#btn-music.is-playing {
+  color: var(--dourado);
+  background: var(--azul-pale);
+  transform: scale(1.05);
+}
+
 /* ------------------------------------------------------------- 5. LAYOUT */
 .page-header,
 .layout {
   max-width: 1200px;
   margin-inline: auto;
   padding-inline: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .page-header { padding-top: clamp(2rem, 5vw, 4rem); }
@@ -154,7 +180,7 @@ body {
   padding-bottom: 6rem;
 }
 
-/* ------------------------------------------------------------- 6. MASTHEAD */
+/* ------------------------------------------------------------- 6. MASTHEAD (VIDRO) */
 .masthead {
   width: 100%;
   table-layout: fixed;
@@ -163,11 +189,15 @@ body {
   border-top: 8px solid var(--verde);
   border-bottom: 3px solid var(--dourado);
   margin: 0;
-  background: var(--surface-blur);
+  
+  /* Efeito de Vidro */
+  background: var(--azul-pale);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-radius: 12px;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-card), 0 0 40px rgba(0,0,0,0.2); /* Brilho extra */
   overflow: hidden;
-  transition: background-color .4s ease, border-color .4s ease;
+  transition: all .4s ease;
 }
 
 .masthead td { vertical-align: middle; padding: 1.5rem; }
@@ -186,13 +216,11 @@ body {
   display: block;
   margin: 0 auto;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   transition: transform .3s ease;
 }
 
-.brasao:hover {
-  transform: scale(1.05);
-}
+.brasao:hover { transform: scale(1.05); }
 
 .masthead .institution {
   text-align: left;
@@ -216,14 +244,19 @@ body {
   line-height: 1.4;
 }
 
-/* ------------------------------------------------------------------ 7. TOC */
+/* ------------------------------------------------------------------ 7. TOC (VIDRO) */
 .toc {
   position: sticky;
   top: 2rem;
   align-self: start;
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
-  padding-inline-end: .5rem;
+  padding: 1.5rem 1rem;
+  background: var(--azul-pale);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 8px;
+  border: 1px solid var(--borda);
 }
 
 .toc-title {
@@ -242,32 +275,28 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-inline-start: 1px solid var(--borda);
 }
 
 .toc-list a {
   display: block;
-  padding: .6rem 0 .6rem 1rem;
-  margin-inline-start: -1px;
-  border-inline-start: 3px solid transparent;
+  padding: .6rem 0 .6rem .5rem;
   color: var(--texto-2);
   text-decoration: none;
   font-family: var(--sans);
   font-size: .85rem;
   line-height: 1.4;
   transition: all .2s ease;
+  border-radius: 4px;
 }
 
-.toc-list a:hover { color: var(--azul-senado); background: var(--azul-pale); border-radius: 0 4px 4px 0; }
+.toc-list a:hover { color: var(--dourado); background: rgba(0,0,0,0.05); }
 
 .toc-list a.active {
-  color: var(--azul-senado);
-  border-inline-start-color: var(--dourado);
-  font-weight: 600;
-  background: var(--azul-pale);
+  color: var(--dourado);
+  font-weight: 700;
 }
 
-/* ------------------------------------------------------------ 8. CONTEÚDO */
+/* ------------------------------------------------------------ 8. CONTEÚDO (VIDRO) */
 .doc-title {
   margin: 0 0 2rem;
   padding-bottom: 1rem;
@@ -280,6 +309,7 @@ body {
   line-height: 1.3;
   text-align: center;
   text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Sombra para destacar no vídeo */
 }
 
 .summary {
@@ -287,6 +317,8 @@ body {
   margin: 0 0 2.5rem auto;
   padding: 1.25rem 1.5rem;
   background: var(--azul-pale);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-inline-start: 5px solid var(--dourado);
   border-radius: 4px;
   color: var(--texto);
@@ -303,6 +335,7 @@ p {
   text-indent: var(--recuo);
   orphans: 3;
   widows: 3;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Ajuda a ler sobre o vídeo */
 }
 
 h2 {
@@ -310,9 +343,11 @@ h2 {
   margin: clamp(2rem, 4vw, 2.5rem) 0 1rem;
   padding: .75rem 2.5rem .75rem 1.25rem;
   background: var(--azul-pale);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-inline-start: 5px solid var(--dourado);
   border-bottom: 1px solid var(--borda);
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 6px 6px 0;
   color: var(--azul-senado);
   font-family: var(--sans);
   font-size: var(--fs-secao);
@@ -337,6 +372,7 @@ h2 {
   line-height: 2;
   text-align: center;
   text-indent: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
 /* -------------------------------------------------------- 10. BACK TO TOP */
@@ -362,7 +398,7 @@ h2 {
 }
 
 .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-.back-to-top:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+.back-to-top:hover { transform: translateY(-4px) scale(1.05); }
 
 /* ---------------------------------------------------------------- 11. TOAST */
 .toast {
@@ -389,11 +425,11 @@ h2 {
 /* ---------------------------------------------------------- 12. RESPONSIVO */
 @media (max-width: 900px) {
   .layout { grid-template-columns: 1fr; gap: 2rem; }
-  .toc { position: static; max-height: none; padding: 0 0 1.5rem; border-bottom: 2px solid var(--borda); }
-  .toc-list { display: flex; flex-wrap: wrap; gap: .5rem; border: 0; }
+  .toc { position: static; max-height: none; padding: 1rem; }
+  .toc-list { display: flex; flex-wrap: wrap; gap: .5rem; }
   .toc-list li { margin: 0; }
-  .toc-list a { padding: .5rem .85rem; margin: 0; border: 1px solid var(--borda); border-radius: 999px; font-size: .8rem; }
-  .toc-list a.active { background: var(--azul-senado); color: var(--papel); border-color: var(--azul-senado); }
+  .toc-list a { padding: .5rem .85rem; border: 1px solid var(--borda); border-radius: 999px; font-size: .8rem; background: rgba(0,0,0,0.1); }
+  .toc-list a.active { background: var(--dourado); color: #000; border-color: var(--dourado); }
 }
 
 @media (max-width: 700px) {
@@ -412,7 +448,7 @@ h2 {
 }
 
 /* ============================================================== */
-/* 13. SEÇÃO DE CONSELHEIROS                                      */
+/* 13. SEÇÃO DE CONSELHEIROS (VIDRO)                              */
 /* ============================================================== */
 .conselheiros {
   margin-top: 4rem;
@@ -424,6 +460,7 @@ h2 {
   text-align: center;
   border: none;
   background: none;
+  backdrop-filter: none;
   box-shadow: none;
   padding: 0;
   margin-bottom: 2.5rem;
@@ -431,9 +468,7 @@ h2 {
   color: var(--dourado);
 }
 
-.categoria-membros {
-  margin-bottom: 3rem;
-}
+.categoria-membros { margin-bottom: 3rem; }
 
 .categoria-titulo {
   font-family: var(--sans);
@@ -468,20 +503,24 @@ h2 {
   gap: 1.5rem;
 }
 
+/* CARTÃO DE VIDRO */
 .card-conselheiro {
   display: flex;
   align-items: center;
   gap: 1rem;
   background: var(--azul-pale);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: var(--shadow-card);
   border: 1px solid var(--borda);
-  transition: transform .2s ease;
+  transition: transform .2s ease, background .3s;
 }
 
 .card-conselheiro:hover {
   transform: translateY(-3px);
+  background: rgba(16, 42, 67, 0.8);
 }
 
 .foto-conselheiro img {
@@ -507,13 +546,13 @@ h2 {
 
 /* DESTAQUE PARA OS VITALÍCIOS */
 .destaque-permanente {
-  background: linear-gradient(145deg, var(--azul-pale), var(--papel));
+  background: linear-gradient(145deg, rgba(16, 42, 67, 0.8), rgba(0, 0, 0, 0.4));
   border: 2px solid var(--dourado);
   flex-direction: column;
   text-align: center;
   padding: 1.5rem 1rem;
   width: 220px;
-  box-shadow: 0 0 20px rgba(229, 185, 90, 0.15);
+  box-shadow: 0 0 25px rgba(229, 185, 90, 0.2);
 }
 
 .destaque-permanente .foto-conselheiro img {
@@ -554,54 +593,25 @@ h2 {
     --azul-senado: #00305c !important; --azul-pale: #f0f4f8 !important; --dourado: #c99b3b !important;
   }
   html, body { background: #fff; }
+  
+  /* ESCONDE O VÍDEO E EFEITOS NA IMPRESSÃO */
+  #video-fundo { display: none !important; }
   .progress, .toolbar, .toc, .back-to-top, .toast, .heading-anchor { display: none; }
+  
   .page-header, .layout { max-width: none; padding: 0; }
   .layout { display: block; }
-  .masthead, .summary, h2, .motto, .doc-title, .card-conselheiro { print-color-adjust: exact; -webkit-print-color-adjust: exact; box-shadow: none !important; }
+  
+  .masthead, .summary, h2, .motto, .doc-title, .card-conselheiro { 
+    print-color-adjust: exact; -webkit-print-color-adjust: exact; 
+    box-shadow: none !important; 
+    backdrop-filter: none !important; 
+    background: #f0f4f8 !important;
+  }
+  
   .masthead { break-inside: avoid; break-after: avoid; }
   .doc-title { break-after: avoid; }
   .summary { break-inside: avoid; }
   .motto { break-inside: avoid; break-before: avoid; }
-  p, .clause { orphans: 3; widows: 3; }
+  p, .clause { orphans: 3; widows: 3; text-shadow: none; }
   .card-conselheiro { break-inside: avoid; border: 1px solid #ccc; }
-}
-
-/* Efeito do botão de música ativo */
-#btn-music.is-playing {
-  color: var(--dourado);
-  background: var(--azul-pale);
-  transform: scale(1.05);
-   }
-/* ============================================================== */
-/* VÍDEO DE FUNDO                                                 */
-/* ============================================================== */
-#video-fundo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Faz o vídeo preencher a tela inteira sem distorcer */
-  z-index: -1; /* Joga o vídeo para trás de todo o conteúdo */
-  opacity: 0.15; /* Deixa o vídeo bem apagado (15% de opacidade) */
-  pointer-events: none; /* Impede que clique no vídeo sem querer */
-}
-
-/* Ajuste para o fundo do corpo ficar transparente e deixar o vídeo aparecer */
-body {
-  background-color: transparent !important;
-}
-
-/* Ajuste nos cartões e no topo para ficarem com fundo sólido e o texto não misturar com o vídeo */
-.masthead, .summary, .card-conselheiro, .toolbar {
-  backdrop-filter: blur(8px); /* Efeito de vidro embaçado atrás dos elementos */
-  -webkit-backdrop-filter: blur(8px);
-}
-
-/* Opcional: Se quiser que o fundo do site no modo escuro combine com o vídeo */
-:root[data-theme="dark"] body {
-  background-color: #081c2e !important; /* A cor azul escura por baixo do vídeo */
-}
-:root[data-theme="light"] body {
-  background-color: #ffffff !important; /* A cor branca por baixo do vídeo */
 }
