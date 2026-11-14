@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CARTA INSTITUCIONAL — DESIGN PREMIUM (EFEITO VIDRO & VÍDEO)
+   CARTA INSTITUCIONAL — DESIGN PREMIUM (EFEITO VIDRO & VÍDEO REAL)
    ========================================================================== */
 
 /* ---------------------------------------------------------------- 1. TOKENS */
@@ -18,10 +18,10 @@
   --respiro: clamp(1.25rem, 4vw, 2.5rem);
   --recuo: 1.75em;
 
-  /* Cores - MODO BRANCO (Vidro Claro) */
+  /* Cores - MODO BRANCO */
   --azul-senado: #00305c;
   --azul-escuro: #00213d;
-  --azul-pale: rgba(255, 255, 255, 0.75); /* Vidro branco transparente */
+  --azul-pale: rgba(255, 255, 255, 0.65); /* Blocos brancos translúcidos */
   --verde: #00824a;
   --dourado: #c99b3b; 
   --texto: #2c3338;
@@ -36,18 +36,18 @@
   color-scheme: light;
 }
 
-/* Cores - MODO AZUL OFICIAL (Vidro Fumê) */
+/* Cores - MODO AZUL ESCURO (Onde o vídeo vai brilhar) */
 :root[data-theme="dark"] {
   --azul-senado: #7cb6e8; 
   --azul-escuro: #1a4d80;
-  --azul-pale: rgba(16, 42, 67, 0.65); /* Vidro escuro transparente (65% de opacidade) */
+  --azul-pale: rgba(16, 42, 67, 0.6); /* Blocos escuros translúcidos (60% de tinta) */
   --verde: #4fd394;
   --dourado: #e5b95a; 
   --texto: #e8ecf0;
   --texto-2: #a5b9cc;
   --borda: rgba(255, 255, 255, 0.1);
   
-  --surface-blur: rgba(8, 28, 46, 0.85);
+  --surface-blur: rgba(8, 28, 46, 0.7);
   --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.5);
   --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
   --btn-primary-bg: #7cb6e8;
@@ -55,7 +55,7 @@
   color-scheme: dark;
 }
 
-/* ------------------------------------------------------------------ 2. BASE E VÍDEO */
+/* ------------------------------------------------------------------ 2. BASE */
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
@@ -68,7 +68,8 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #081c2e; /* Cor base caso o vídeo demore a carregar */
+  /* FUNDO DO SITE TRANSPARENTE PARA MOSTRAR O VÍDEO */
+  background-color: transparent !important; 
   color: var(--texto);
   font-family: var(--serif);
   font-size: var(--fs-corpo);
@@ -78,26 +79,28 @@ body {
   text-rendering: optimizeLegibility;
   hyphens: auto;
   overflow-wrap: break-word;
-  transition: background-color .4s ease, color .4s ease;
+  transition: color .4s ease;
 }
 
-/* O VÍDEO DE FUNDO */
+/* O VÍDEO NO FUNDO ABSOLUTO */
 #video-fundo {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  z-index: -2;
-  opacity: 0.35; /* Deixa o vídeo visível, mas não ofuscante */
+  z-index: -1; /* Fica atrás de tudo */
+  opacity: 0.6; /* 60% de visibilidade */
   pointer-events: none;
 }
 
-/* Filtro para garantir a leitura no Modo Claro */
+/* No modo claro, o vídeo fica mais apagado para não brigar com o branco */
 :root[data-theme="light"] #video-fundo {
-  opacity: 0.1;
+  opacity: 0.2;
 }
+
+/* Garantir que o HTML por trás do body não fique branco */
+html { background-color: #081c2e; }
 
 ::selection { background: var(--dourado); color: #fff; }
 
@@ -144,7 +147,7 @@ body {
   transition: all .2s ease;
 }
 
-.tool-btn:hover { background: var(--azul-pale); color: var(--dourado); transform: scale(1.05); }
+.tool-btn:hover { background: rgba(255,255,255,0.1); color: var(--dourado); transform: scale(1.05); }
 .tool-btn:focus-visible { outline: 2px solid var(--dourado); outline-offset: 2px; }
 
 .icon { width: 1.1rem; height: 1.1rem; }
@@ -157,7 +160,7 @@ body {
 
 #btn-music.is-playing {
   color: var(--dourado);
-  background: var(--azul-pale);
+  background: rgba(255,255,255,0.1);
   transform: scale(1.05);
 }
 
@@ -190,14 +193,13 @@ body {
   border-bottom: 3px solid var(--dourado);
   margin: 0;
   
-  /* Efeito de Vidro */
   background: var(--azul-pale);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 12px;
-  box-shadow: var(--shadow-card), 0 0 40px rgba(0,0,0,0.2); /* Brilho extra */
+  box-shadow: var(--shadow-card), 0 0 40px rgba(0,0,0,0.3);
   overflow: hidden;
-  transition: all .4s ease;
+  transition: background .4s ease;
 }
 
 .masthead td { vertical-align: middle; padding: 1.5rem; }
@@ -289,14 +291,10 @@ body {
   border-radius: 4px;
 }
 
-.toc-list a:hover { color: var(--dourado); background: rgba(0,0,0,0.05); }
+.toc-list a:hover { color: var(--dourado); }
+.toc-list a.active { color: var(--dourado); font-weight: 700; }
 
-.toc-list a.active {
-  color: var(--dourado);
-  font-weight: 700;
-}
-
-/* ------------------------------------------------------------ 8. CONTEÚDO (VIDRO) */
+/* ------------------------------------------------------------ 8. CONTEÚDO */
 .doc-title {
   margin: 0 0 2rem;
   padding-bottom: 1rem;
@@ -309,7 +307,7 @@ body {
   line-height: 1.3;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Sombra para destacar no vídeo */
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .summary {
@@ -335,7 +333,7 @@ p {
   text-indent: var(--recuo);
   orphans: 3;
   widows: 3;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Ajuda a ler sobre o vídeo */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6); /* Sombra forte no texto */
 }
 
 h2 {
@@ -428,7 +426,7 @@ h2 {
   .toc { position: static; max-height: none; padding: 1rem; }
   .toc-list { display: flex; flex-wrap: wrap; gap: .5rem; }
   .toc-list li { margin: 0; }
-  .toc-list a { padding: .5rem .85rem; border: 1px solid var(--borda); border-radius: 999px; font-size: .8rem; background: rgba(0,0,0,0.1); }
+  .toc-list a { padding: .5rem .85rem; border: 1px solid var(--borda); border-radius: 999px; font-size: .8rem; }
   .toc-list a.active { background: var(--dourado); color: #000; border-color: var(--dourado); }
 }
 
@@ -448,7 +446,7 @@ h2 {
 }
 
 /* ============================================================== */
-/* 13. SEÇÃO DE CONSELHEIROS (VIDRO)                              */
+/* 13. SEÇÃO DE CONSELHEIROS */
 /* ============================================================== */
 .conselheiros {
   margin-top: 4rem;
@@ -490,20 +488,9 @@ h2 {
   margin: .5rem auto 0;
 }
 
-.grid-permanentes {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
+.grid-permanentes { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+.grid-ordinarios { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
 
-.grid-ordinarios {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-}
-
-/* CARTÃO DE VIDRO */
 .card-conselheiro {
   display: flex;
   align-items: center;
@@ -520,33 +507,20 @@ h2 {
 
 .card-conselheiro:hover {
   transform: translateY(-3px);
-  background: rgba(16, 42, 67, 0.8);
+  background: rgba(16, 42, 67, 0.85);
 }
 
 .foto-conselheiro img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
+  width: 60px; height: 60px; border-radius: 50%; object-fit: cover;
   border: 2px solid var(--borda);
 }
 
-.info-conselheiro h4 {
-  margin: 0 0 .2rem;
-  font-family: var(--sans);
-  font-size: 1rem;
-  color: var(--texto);
-}
-
-.info-conselheiro .cargo {
-  font-family: var(--sans);
-  font-size: .75rem;
-  color: var(--texto-2);
-}
+.info-conselheiro h4 { margin: 0 0 .2rem; font-family: var(--sans); font-size: 1rem; color: var(--texto); }
+.info-conselheiro .cargo { font-family: var(--sans); font-size: .75rem; color: var(--texto-2); }
 
 /* DESTAQUE PARA OS VITALÍCIOS */
 .destaque-permanente {
-  background: linear-gradient(145deg, rgba(16, 42, 67, 0.8), rgba(0, 0, 0, 0.4));
+  background: linear-gradient(145deg, rgba(16, 42, 67, 0.8), rgba(0, 0, 0, 0.5));
   border: 2px solid var(--dourado);
   flex-direction: column;
   text-align: center;
@@ -556,27 +530,11 @@ h2 {
 }
 
 .destaque-permanente .foto-conselheiro img {
-  width: 90px;
-  height: 90px;
-  border-color: var(--dourado);
-  box-shadow: 0 0 15px rgba(229, 185, 90, 0.4);
-  margin-bottom: .5rem;
+  width: 90px; height: 90px; border-color: var(--dourado); box-shadow: 0 0 15px rgba(229, 185, 90, 0.4); margin-bottom: .5rem;
 }
 
-.destaque-permanente .info-conselheiro h4 {
-  font-size: 1.1rem;
-  color: var(--azul-senado);
-  font-weight: 800;
-}
-
-.destaque-permanente .info-conselheiro .cargo {
-  color: var(--dourado);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  margin-top: .3rem;
-  display: block;
-}
+.destaque-permanente .info-conselheiro h4 { font-size: 1.1rem; color: var(--azul-senado); font-weight: 800; }
+.destaque-permanente .info-conselheiro .cargo { color: var(--dourado); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-top: .3rem; display: block; }
 
 @media (max-width: 600px) {
   .grid-permanentes { flex-direction: column; align-items: center; }
@@ -592,26 +550,16 @@ h2 {
     --papel: #ffffff !important; --texto: #000000 !important; --texto-2: #333333 !important;
     --azul-senado: #00305c !important; --azul-pale: #f0f4f8 !important; --dourado: #c99b3b !important;
   }
-  html, body { background: #fff; }
-  
-  /* ESCONDE O VÍDEO E EFEITOS NA IMPRESSÃO */
+  html, body { background: #fff !important; }
   #video-fundo { display: none !important; }
   .progress, .toolbar, .toc, .back-to-top, .toast, .heading-anchor { display: none; }
-  
   .page-header, .layout { max-width: none; padding: 0; }
   .layout { display: block; }
-  
-  .masthead, .summary, h2, .motto, .doc-title, .card-conselheiro { 
-    print-color-adjust: exact; -webkit-print-color-adjust: exact; 
-    box-shadow: none !important; 
-    backdrop-filter: none !important; 
-    background: #f0f4f8 !important;
-  }
-  
+  .masthead, .summary, h2, .motto, .doc-title, .card-conselheiro { print-color-adjust: exact; -webkit-print-color-adjust: exact; box-shadow: none !important; backdrop-filter: none !important; background: #f0f4f8 !important; }
   .masthead { break-inside: avoid; break-after: avoid; }
   .doc-title { break-after: avoid; }
   .summary { break-inside: avoid; }
   .motto { break-inside: avoid; break-before: avoid; }
   p, .clause { orphans: 3; widows: 3; text-shadow: none; }
   .card-conselheiro { break-inside: avoid; border: 1px solid #ccc; }
-}
+   }
