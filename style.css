@@ -407,4 +407,161 @@ h2 {
   .masthead .institution { padding-inline-start: 0; text-align: center; padding-top: 1.5rem; }
 
   .summary { width: 100%; margin-inline-start: 0; }
-  h2
+  h2 { padding-inline-end: 1rem; }
+  .heading-anchor { display: none; }
+}
+
+/* ============================================================== */
+/* 13. SEÇÃO DE CONSELHEIROS                                      */
+/* ============================================================== */
+.conselheiros {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 2px dashed var(--borda);
+}
+
+.conselheiros-title {
+  text-align: center;
+  border: none;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 2.5rem;
+  font-size: var(--fs-titulo);
+  color: var(--dourado);
+}
+
+.categoria-membros {
+  margin-bottom: 3rem;
+}
+
+.categoria-titulo {
+  font-family: var(--sans);
+  font-size: .85rem;
+  color: var(--texto-2);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.categoria-titulo::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--borda);
+  margin: .5rem auto 0;
+}
+
+.grid-permanentes {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.grid-ordinarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.card-conselheiro {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--azul-pale);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--borda);
+  transition: transform .2s ease;
+}
+
+.card-conselheiro:hover {
+  transform: translateY(-3px);
+}
+
+.foto-conselheiro img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--borda);
+}
+
+.info-conselheiro h4 {
+  margin: 0 0 .2rem;
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--texto);
+}
+
+.info-conselheiro .cargo {
+  font-family: var(--sans);
+  font-size: .75rem;
+  color: var(--texto-2);
+}
+
+/* DESTAQUE PARA OS VITALÍCIOS */
+.destaque-permanente {
+  background: linear-gradient(145deg, var(--azul-pale), var(--papel));
+  border: 2px solid var(--dourado);
+  flex-direction: column;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  width: 220px;
+  box-shadow: 0 0 20px rgba(229, 185, 90, 0.15);
+}
+
+.destaque-permanente .foto-conselheiro img {
+  width: 90px;
+  height: 90px;
+  border-color: var(--dourado);
+  box-shadow: 0 0 15px rgba(229, 185, 90, 0.4);
+  margin-bottom: .5rem;
+}
+
+.destaque-permanente .info-conselheiro h4 {
+  font-size: 1.1rem;
+  color: var(--azul-senado);
+  font-weight: 800;
+}
+
+.destaque-permanente .info-conselheiro .cargo {
+  color: var(--dourado);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-top: .3rem;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .grid-permanentes { flex-direction: column; align-items: center; }
+  .card-conselheiro { flex-direction: column; text-align: center; }
+}
+
+/* ------------------------------------------------------------- 14. IMPRESSÃO */
+@page { size: A4; margin: 22mm 20mm 20mm; }
+
+@media print {
+  :root {
+    --fs-corpo: 11pt; --fs-ementa: 10pt; --fs-titulo: 14pt; --fs-secao: 10.5pt; --fs-instituicao: 17pt; --fs-lema: 11pt;
+    --papel: #ffffff !important; --texto: #000000 !important; --texto-2: #333333 !important;
+    --azul-senado: #00305c !important; --azul-pale: #f0f4f8 !important; --dourado: #c99b3b !important;
+  }
+  html, body { background: #fff; }
+  .progress, .toolbar, .toc, .back-to-top, .toast, .heading-anchor { display: none; }
+  .page-header, .layout { max-width: none; padding: 0; }
+  .layout { display: block; }
+  .masthead, .summary, h2, .motto, .doc-title, .card-conselheiro { print-color-adjust: exact; -webkit-print-color-adjust: exact; box-shadow: none !important; }
+  .masthead { break-inside: avoid; break-after: avoid; }
+  .doc-title { break-after: avoid; }
+  .summary { break-inside: avoid; }
+  .motto { break-inside: avoid; break-before: avoid; }
+  p, .clause { orphans: 3; widows: 3; }
+  .card-conselheiro { break-inside: avoid; border: 1px solid #ccc; }
+   }
