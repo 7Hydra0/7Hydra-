@@ -563,3 +563,86 @@ h2 {
   p, .clause { orphans: 3; widows: 3; text-shadow: none; }
   .card-conselheiro { break-inside: avoid; border: 1px solid #ccc; }
    }
+/* ============================================================== */
+/* TELA DE ENTRADA (OVERLAY)                                      */
+/* ============================================================== */
+#tela-entrada {
+  position: fixed;
+  inset: 0;
+  background: #081c2e; /* Cor de fundo escura */
+  z-index: 9999; /* Fica por cima de TUDO */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#tela-entrada.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.entrada-conteudo {
+  padding: 2rem;
+  animation: fadeIn 1.5s ease;
+}
+
+.entrada-logo {
+  width: 180px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 40px rgba(229, 185, 90, 0.4); /* Brilho dourado */
+  animation: pulsar 3s infinite alternate;
+}
+
+#tela-entrada h1 {
+  color: #e5b95a; /* Dourado */
+  font-family: var(--sans);
+  font-size: 1.8rem;
+  letter-spacing: .1em;
+  margin-bottom: .5rem;
+}
+
+#tela-entrada p {
+  color: #a5b9cc;
+  font-family: var(--sans);
+  font-size: .9rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  text-indent: 0;
+}
+
+#btn-entrar {
+  background: transparent;
+  color: #e5b95a;
+  border: 2px solid #e5b95a;
+  padding: 1rem 2.5rem;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#btn-entrar:hover {
+  background: #e5b95a;
+  color: #081c2e;
+  box-shadow: 0 0 20px rgba(229, 185, 90, 0.6);
+  transform: scale(1.05);
+}
+
+@keyframes pulsar {
+  0% { transform: scale(1); box-shadow: 0 0 20px rgba(229, 185, 90, 0.2); }
+  100% { transform: scale(1.05); box-shadow: 0 0 40px rgba(229, 185, 90, 0.6); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
