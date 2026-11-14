@@ -1,435 +1,169 @@
 /* ==========================================================================
-   CARTA INSTITUCIONAL — DESIGN PREMIUM (AZUL OFICIAL & BRANCO)
+   Interatividade da Carta Institucional
    ========================================================================== */
+(function () {
+  'use strict';
 
-/* ---------------------------------------------------------------- 1. TOKENS */
-:root {
-  /* Tipografia e Medidas */
-  --serif: "Times New Roman", "Liberation Serif", Georgia, serif;
-  --sans: "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
-  --font-scale: 1;
-  
-  --fs-corpo: calc(clamp(11pt, 0.35vw + 10pt, 12.5pt) * var(--font-scale));
-  --fs-ementa: calc(clamp(9.5pt, 0.25vw + 9pt, 10.5pt) * var(--font-scale));
-  --fs-titulo: calc(clamp(13pt, 0.9vw + 10pt, 15.5pt) * var(--font-scale));
-  --fs-secao: calc(clamp(10pt, 0.3vw + 9.2pt, 11pt) * var(--font-scale));
-  --fs-instituicao: calc(clamp(13pt, 2vw + 8pt, 19pt) * var(--font-scale));
-  --fs-lema: calc(clamp(10pt, 0.35vw + 9pt, 12pt) * var(--font-scale));
-  
-  --respiro: clamp(1.25rem, 4vw, 2.5rem);
-  --recuo: 1.75em;
+  const root        = document.documentElement;
+  const progress    = document.getElementById('progress');
+  const backToTop   = document.querySelector('.back-to-top');
+  const toast       = document.querySelector('.toast');
+  const tocLinks    = document.querySelectorAll('.toc-list a');
+  const headings    = document.querySelectorAll('main.document h2[id]');
 
-  /* Cores - MODO BRANCO */
-  --azul-senado: #00305c;
-  --azul-escuro: #00213d;
-  --azul-pale: #f0f4f8;
-  --verde: #00824a;
-  --dourado: #c99b3b; /* Nova cor extraída do brasão */
-  --texto: #2c3338;
-  --texto-2: #5a6672;
-  --borda: #e1e7ed;
-  --papel: #ffffff;
-  --surface-blur: rgba(255, 255, 255, 0.85);
-  --shadow-float: 0 8px 30px rgba(0, 48, 92, 0.08);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
-  --btn-primary-bg: #00305c;
-  --btn-primary-fg: #ffffff;
-  color-scheme: light;
-}
-
-/* Cores - MODO AZUL OFICIAL (Com toques de dourado) */
-:root[data-theme="dark"] {
-  --azul-senado: #7cb6e8; 
-  --azul-escuro: #1a4d80;
-  --azul-pale: #102a43; 
-  --verde: #4fd394;
-  --dourado: #e5b95a; /* Dourado mais claro para o fundo escuro */
-  --texto: #e8ecf0;
-  --texto-2: #a5b9cc;
-  --borda: #2a4b6b;
-  --papel: #081c2e; 
-  --surface-blur: rgba(8, 28, 46, 0.85);
-  --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.4);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.2);
-  --btn-primary-bg: #7cb6e8;
-  --btn-primary-fg: #081c2e;
-  color-scheme: dark;
-}
-
-/* ------------------------------------------------------------------ 2. BASE */
-*, *::before, *::after { box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 2rem;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--papel);
-  color: var(--texto);
-  font-family: var(--serif);
-  font-size: var(--fs-corpo);
-  line-height: 1.7;
-  font-kerning: normal;
-  font-variant-ligatures: common-ligatures;
-  text-rendering: optimizeLegibility;
-  hyphens: auto;
-  overflow-wrap: break-word;
-  transition: background-color .4s ease, color .4s ease;
-}
-
-::selection { background: var(--dourado); color: #fff; }
-
-/* ---------------------------------------------------------- 3. PROGRESS BAR */
-.progress {
-  position: fixed;
-  inset: 0 0 auto 0;
-  height: 4px;
-  width: 0%;
-  background: linear-gradient(90deg, var(--dourado), var(--azul-senado));
-  z-index: 100;
-  transition: width .1s linear;
-}
-
-/* -------------------------------------------------------------- 4. TOOLBAR */
-.toolbar {
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  display: flex;
-  gap: .35rem;
-  padding: .4rem;
-  background: var(--surface-blur);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--borda);
-  border-radius: 999px;
-  box-shadow: var(--shadow-float);
-  z-index: 50;
-  transition: background-color .4s ease, border-color .4s ease;
-}
-
-.tool-btn {
-  display: grid;
-  place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--texto);
-  cursor: pointer;
-  transition: all .2s ease;
-}
-
-.tool-btn:hover { background: var(--azul-pale); color: var(--dourado); transform: scale(1.05); }
-.tool-btn:focus-visible { outline: 2px solid var(--dourado); outline-offset: 2px; }
-
-.icon { width: 1.1rem; height: 1.1rem; }
-.font-icon { font-family: var(--serif); font-weight: 700; line-height: 1; }
-.font-icon.is-small { font-size: .85rem; }
-.font-icon.is-large { font-size: 1.15rem; }
-
-[data-theme="light"] .icon-sun { display: none; }
-[data-theme="dark"] .icon-moon { display: none; }
-
-/* ------------------------------------------------------------- 5. LAYOUT */
-.page-header,
-.layout {
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-}
-
-.page-header { padding-top: clamp(2rem, 5vw, 4rem); }
-
-.layout {
-  display: grid;
-  grid-template-columns: 230px minmax(0, 1fr);
-  gap: 3rem;
-  padding-bottom: 6rem;
-}
-
-/* ------------------------------------------------------------- 6. MASTHEAD */
-.masthead {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-top: 8px solid var(--verde);
-  border-bottom: 3px solid var(--dourado);
-  margin: 0;
-  background: var(--surface-blur);
-  border-radius: 12px;
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-  transition: background-color .4s ease, border-color .4s ease;
-}
-
-.masthead td { vertical-align: middle; padding: 1.5rem; }
-
-/* ESTILO DA IMAGEM DO BRASÃO */
-.masthead .mark {
-  width: 150px; /* Largura fixa da coluna da imagem */
-  text-align: center;
-  border-right: 1px solid var(--borda);
-  padding: 1rem;
-}
-
-.brasao {
-  width: 100%;
-  max-width: 120px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: transform .3s ease;
-}
-
-.brasao:hover {
-  transform: scale(1.05);
-}
-
-.masthead .institution {
-  text-align: left;
-  padding-inline-start: clamp(1rem, 3vw, 2.5rem);
-  color: var(--azul-senado);
-  font-family: var(--sans);
-  font-size: var(--fs-instituicao);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: .04em;
-  hyphens: manual;
-}
-
-.masthead .institution small {
-  display: block;
-  margin-top: .5em;
-  color: var(--texto-2);
-  font-size: clamp(9pt, .55em, 10.5pt);
-  font-weight: 400;
-  letter-spacing: .02em;
-  line-height: 1.4;
-}
-
-/* ------------------------------------------------------------------ 7. TOC */
-.toc {
-  position: sticky;
-  top: 2rem;
-  align-self: start;
-  max-height: calc(100vh - 4rem);
-  overflow-y: auto;
-  padding-inline-end: .5rem;
-}
-
-.toc-title {
-  margin: 0 0 1rem;
-  padding: 0 0 .5rem 0;
-  border-bottom: 2px solid var(--borda);
-  color: var(--texto-2);
-  font-family: var(--sans);
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-}
-
-.toc-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-inline-start: 1px solid var(--borda);
-}
-
-.toc-list a {
-  display: block;
-  padding: .6rem 0 .6rem 1rem;
-  margin-inline-start: -1px;
-  border-inline-start: 3px solid transparent;
-  color: var(--texto-2);
-  text-decoration: none;
-  font-family: var(--sans);
-  font-size: .85rem;
-  line-height: 1.4;
-  transition: all .2s ease;
-}
-
-.toc-list a:hover { color: var(--azul-senado); background: var(--azul-pale); border-radius: 0 4px 4px 0; }
-
-.toc-list a.active {
-  color: var(--azul-senado);
-  border-inline-start-color: var(--dourado);
-  font-weight: 600;
-  background: var(--azul-pale);
-}
-
-/* ------------------------------------------------------------ 8. CONTEÚDO */
-.doc-title {
-  margin: 0 0 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 3px solid var(--dourado);
-  color: var(--azul-senado);
-  font-family: var(--sans);
-  font-size: var(--fs-titulo);
-  font-weight: 800;
-  letter-spacing: .08em;
-  line-height: 1.3;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.summary {
-  width: min(80%, 60ch);
-  margin: 0 0 2.5rem auto;
-  padding: 1.25rem 1.5rem;
-  background: var(--azul-pale);
-  border-inline-start: 5px solid var(--dourado);
-  border-radius: 4px;
-  color: var(--texto);
-  font-family: var(--sans);
-  font-size: var(--fs-ementa);
-  line-height: 1.6;
-  text-align: justify;
-  box-shadow: var(--shadow-card);
-}
-
-p {
-  margin: 0 0 1em;
-  text-align: justify;
-  text-indent: var(--recuo);
-  orphans: 3;
-  widows: 3;
-}
-
-h2 {
-  position: relative;
-  margin: clamp(2rem, 4vw, 2.5rem) 0 1rem;
-  padding: .75rem 2.5rem .75rem 1.25rem;
-  background: var(--azul-pale);
-  border-inline-start: 5px solid var(--dourado);
-  border-bottom: 1px solid var(--borda);
-  border-radius: 0 4px 4px 0;
-  color: var(--azul-senado);
-  font-family: var(--sans);
-  font-size: var(--fs-secao);
-  font-weight: 700;
-  letter-spacing: .05em;
-  line-height: 1.35;
-  text-transform: uppercase;
-  box-shadow: var(--shadow-card);
-}
-
-/* ------------------------------------------------------------- 9. ENCERRAMENTO */
-.motto {
-  margin: clamp(3rem, 6vw, 4rem) 0 0;
-  padding: 1.5rem 1rem;
-  border-top: 4px solid var(--dourado);
-  border-bottom: 6px solid var(--verde);
-  color: var(--azul-senado);
-  font-family: var(--sans);
-  font-size: var(--fs-lema);
-  font-weight: 800;
-  letter-spacing: .1em;
-  line-height: 2;
-  text-align: center;
-  text-indent: 0;
-}
-
-/* -------------------------------------------------------- 10. BACK TO TOP */
-.back-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  display: grid;
-  place-items: center;
-  width: 3rem;
-  height: 3rem;
-  border: 0;
-  border-radius: 50%;
-  background: var(--dourado);
-  color: var(--papel);
-  cursor: pointer;
-  box-shadow: var(--shadow-float);
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 40;
-}
-
-.back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-.back-to-top:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
-
-/* ---------------------------------------------------------------- 11. TOAST */
-.toast {
-  position: fixed;
-  left: 50%;
-  bottom: 2rem;
-  transform: translate(-50%, 20px);
-  padding: .75rem 1.5rem;
-  border-radius: 999px;
-  background: var(--azul-escuro);
-  color: #fff;
-  font-family: var(--sans);
-  font-size: .9rem;
-  font-weight: 600;
-  box-shadow: var(--shadow-float);
-  opacity: 0;
-  pointer-events: none;
-  transition: all .3s ease;
-  z-index: 60;
-}
-
-.toast.visible { opacity: 1; transform: translate(-50%, 0); }
-
-/* ---------------------------------------------------------- 12. RESPONSIVO */
-@media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; gap: 2rem; }
-  .toc { position: static; max-height: none; padding: 0 0 1.5rem; border-bottom: 2px solid var(--borda); }
-  .toc-list { display: flex; flex-wrap: wrap; gap: .5rem; border: 0; }
-  .toc-list li { margin: 0; }
-  .toc-list a { padding: .5rem .85rem; margin: 0; border: 1px solid var(--borda); border-radius: 999px; font-size: .8rem; }
-  .toc-list a.active { background: var(--azul-senado); color: var(--papel); border-color: var(--azul-senado); }
-}
-
-@media (max-width: 700px) {
-  :root { --recuo: 1.5em; }
-  .toolbar { top: auto; bottom: 1.5rem; right: 1.5rem; padding: .35rem; }
-  .back-to-top { bottom: 5.5rem; right: 1.5rem; width: 2.75rem; height: 2.75rem; }
-  
-  /* Ajuste do Brasão no Celular */
-  .masthead td { display: block; width: 100%; text-align: center; padding: 1rem; }
-  .masthead .mark { border-right: 0; border-bottom: 1px solid var(--borda); padding-bottom: 1.5rem; }
-  .masthead .institution { padding-inline-start: 0; text-align: center; }
-  
-  .summary { width: 100%; margin-inline-start: 0; }
-  h2 { padding-inline-end: 1rem; }
-  .heading-anchor { display: none; }
-}
-
-/* ------------------------------------------------------------- 13. IMPRESSÃO */
-@page { size: A4; margin: 22mm 20mm 20mm; }
-
-@media print {
-  :root {
-    --fs-corpo: 11pt; --fs-ementa: 10pt; --fs-titulo: 14pt; --fs-secao: 10.5pt; --fs-instituicao: 17pt; --fs-lema: 11pt;
-    --papel: #ffffff !important; --texto: #000000 !important; --texto-2: #333333 !important;
-    --azul-senado: #00305c !important; --azul-pale: #f0f4f8 !important; --dourado: #c99b3b !important;
+  /* ----------------------------------------------------- 1. TEMA */
+  function setTheme(theme) {
+    root.dataset.theme = theme;
+    try { localStorage.setItem('carta:theme', theme); } catch (_) {}
   }
-  html, body { background: #fff; }
-  .progress, .toolbar, .toc, .back-to-top, .toast, .heading-anchor { display: none; }
-  .page-header, .layout { max-width: none; padding: 0; }
-  .layout { display: block; }
-  .masthead, .summary, h2, .motto, .doc-title { print-color-adjust: exact; -webkit-print-color-adjust: exact; box-shadow: none !important; }
-  .masthead { break-inside: avoid; break-after: avoid; }
-  .doc-title { break-after: avoid; }
-  .summary { break-inside: avoid; }
-  .motto { break-inside: avoid; break-before: avoid; }
-  p, .clause { orphans: 3; widows: 3; }
-}
+
+  function toggleTheme() {
+    setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+  }
+
+  /* ----------------------------------------------------- 2. ESCALA DE FONTE */
+  let scale = parseFloat(getComputedStyle(root).getPropertyValue('--font-scale')) || 1;
+
+  function setScale(v) {
+    scale = Math.round(Math.max(0.8, Math.min(1.4, v)) * 100) / 100;
+    root.style.setProperty('--font-scale', scale);
+    try { localStorage.setItem('carta:font-scale', scale); } catch (_) {}
+  }
+
+  /* ----------------------------------------------------- 3. TOAST */
+  let toastTimer;
+  function showToast(msg, ms = 2200) {
+    toast.textContent = msg;
+    toast.classList.add('visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('visible'), ms);
+  }
+
+  /* ----------------------------------------------------- 4. COPIAR URL DA ÂNCORA */
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (_) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (_) {}
+      document.body.removeChild(ta);
+      return ok;
+    }
+  }
+
+  headings.forEach(h => {
+    const a = document.createElement('a');
+    a.className = 'heading-anchor';
+    a.href = '#' + h.id;
+    a.textContent = '#';
+    a.setAttribute('aria-label', 'Copiar link para esta seção');
+    a.title = 'Copiar link para esta seção';
+
+    a.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const url = location.origin + location.pathname + location.search + '#' + h.id;
+      const ok = await copyText(url);
+      showToast(ok ? 'Link copiado' : 'Não foi possível copiar');
+      history.replaceState(null, '', '#' + h.id);
+      h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    h.appendChild(a);
+  });
+
+  /* ----------------------------------------------------- 5. SCROLL SPY + PROGRESSO */
+  const linkMap = new Map();
+  tocLinks.forEach(a => {
+    const id = a.getAttribute('href').slice(1);
+    if (id) linkMap.set(id, a);
+  });
+
+  let ticking = false;
+
+  function updateProgress() {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+
+  function updateActiveSection() {
+    if (!headings.length) return;
+    const offset = window.innerHeight * 0.3;
+    let currentId = headings[0].id;
+
+    headings.forEach(h => {
+      if (h.getBoundingClientRect().top <= offset) currentId = h.id;
+    });
+
+    linkMap.forEach((a, id) => {
+      a.classList.toggle('active', id === currentId);
+    });
+  }
+
+  function updateBackToTop() {
+    backToTop.classList.toggle('visible', window.scrollY > 400);
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateProgress();
+      updateActiveSection();
+      updateBackToTop();
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  /* ----------------------------------------------------- 6. BACK TO TOP */
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ----------------------------------------------------- 7. BOTÕES DA TOOLBAR */
+  document.querySelectorAll('.tool-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      switch (btn.dataset.action) {
+        case 'theme':     toggleTheme();        break;
+        case 'font-up':   setScale(scale + 0.1); break;
+        case 'font-down': setScale(scale - 0.1); break;
+        case 'print':     window.print();       break;
+      }
+    });
+  });
+
+  /* ----------------------------------------------------- 8. ATALHOS DE TECLADO */
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+
+    switch (e.key) {
+      case 't': case 'T': toggleTheme();         e.preventDefault(); break;
+      case '+': case '=': setScale(scale + 0.1); e.preventDefault(); break;
+      case '-': case '_': setScale(scale - 0.1); e.preventDefault(); break;
+      case 'p': case 'P': window.print();        e.preventDefault(); break;
+      case 'Escape':      setScale(1);           break;
+    }
+  });
+
+  /* ----------------------------------------------------- 9. ESTADO INICIAL */
+  // Força o tema Azul (dark) a abrir por padrão caso o usuário seja novo
+  if (!root.dataset.theme) {
+    root.dataset.theme = 'dark';
+  }
+
+  // Roda uma vez ao carregar a página para ajustar a barra e o menu
+  onScroll();
+})();
