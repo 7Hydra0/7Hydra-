@@ -546,7 +546,11 @@ h2 {
 
 /* ------------------------------------------------------------- 14. IMPRESSÃO */
 @page { size: A4; margin: 22mm 20mm 20mm; }
-
+/* Efeito do botão de música ativo */
+#btn-music.is-playing {
+  color: var(--dourado);
+  background: var(--azul-pale);
+}
 @media print {
   :root {
     --fs-corpo: 11pt; --fs-ementa: 10pt; --fs-titulo: 14pt; --fs-secao: 10.5pt; --fs-instituicao: 17pt; --fs-lema: 11pt;
