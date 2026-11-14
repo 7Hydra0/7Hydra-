@@ -4,7 +4,6 @@
 
 /* ---------------------------------------------------------------- 1. TOKENS */
 :root {
-  /* Tipografia e Medidas */
   --serif: "Times New Roman", "Liberation Serif", Georgia, serif;
   --sans: "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
   --font-scale: 1;
@@ -173,7 +172,6 @@ body {
 
 .masthead td { vertical-align: middle; padding: 1.5rem; }
 
-/* ESTILO DA IMAGEM DO BRASÃO */
 .masthead .mark {
   width: 150px;
   text-align: center;
@@ -403,56 +401,10 @@ h2 {
   .toolbar { top: auto; bottom: 1.5rem; right: 1.5rem; padding: .35rem; }
   .back-to-top { bottom: 5.5rem; right: 1.5rem; width: 2.75rem; height: 2.75rem; }
   
-  /* --- AJUSTE DE CENTRALIZAÇÃO NO CELULAR --- */
-  .masthead td { 
-    display: block; 
-    width: 100%; 
-    text-align: center; 
-    padding: 1.5rem 1rem; 
-  }
-  
-  .masthead .mark { 
-    border-right: 0; 
-    border-bottom: 1px solid var(--borda); 
-    padding-bottom: 1.5rem; 
-    margin: 0 auto; /* Centraliza a coluna da imagem */
-    width: 100%;
-  }
-  
-  .brasao {
-    margin: 0 auto; /* Garante a imagem no centro */
-    max-width: 140px; /* Deixa a logo um pouco maior no celular */
-  }
-  
-  .masthead .institution { 
-    padding-inline-start: 0; 
-    text-align: center; 
-    padding-top: 1.5rem; /* Espaço entre a logo e o texto */
-  }
-  /* ----------------------------------------- */
+  .masthead td { display: block; width: 100%; text-align: center; padding: 1.5rem 1rem; }
+  .masthead .mark { border-right: 0; border-bottom: 1px solid var(--borda); padding-bottom: 1.5rem; margin: 0 auto; width: 100%; }
+  .brasao { margin: 0 auto; max-width: 140px; }
+  .masthead .institution { padding-inline-start: 0; text-align: center; padding-top: 1.5rem; }
 
   .summary { width: 100%; margin-inline-start: 0; }
-  h2 { padding-inline-end: 1rem; }
-  .heading-anchor { display: none; }
-}
-
-/* ------------------------------------------------------------- 13. IMPRESSÃO */
-@page { size: A4; margin: 22mm 20mm 20mm; }
-
-@media print {
-  :root {
-    --fs-corpo: 11pt; --fs-ementa: 10pt; --fs-titulo: 14pt; --fs-secao: 10.5pt; --fs-instituicao: 17pt; --fs-lema: 11pt;
-    --papel: #ffffff !important; --texto: #000000 !important; --texto-2: #333333 !important;
-    --azul-senado: #00305c !important; --azul-pale: #f0f4f8 !important; --dourado: #c99b3b !important;
-  }
-  html, body { background: #fff; }
-  .progress, .toolbar, .toc, .back-to-top, .toast, .heading-anchor { display: none; }
-  .page-header, .layout { max-width: none; padding: 0; }
-  .layout { display: block; }
-  .masthead, .summary, h2, .motto, .doc-title { print-color-adjust: exact; -webkit-print-color-adjust: exact; box-shadow: none !important; }
-  .masthead { break-inside: avoid; break-after: avoid; }
-  .doc-title { break-after: avoid; }
-  .summary { break-inside: avoid; }
-  .motto { break-inside: avoid; break-before: avoid; }
-  p, .clause { orphans: 3; widows: 3; }
-   }
+  h2
